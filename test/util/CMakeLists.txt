@@ -3,7 +3,7 @@ set(TEST_LINK_COMPONENTS
   )
 
 set(utilSources
-  PlaceHolder.cpp
+  Bits.cpp
   )
 
 add_unittest(utilTests
