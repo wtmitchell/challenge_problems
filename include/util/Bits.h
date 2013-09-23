@@ -10,11 +10,14 @@
 #define UTIL_BITS_H_INCLUDED
 
 #include <cassert>
+#include <type_traits>
 
 namespace util {
-// This really should only exist for std::is_integral and std::is_unsigned
-// but those require C++11
-template <typename T> T pop_count(T in) {
+// This only exists for types that are std::is_integral and std::is_unsigned
+template <typename T>
+typename std::enable_if<std::is_integral<T>::value &&std::is_unsigned<T>::value,
+                        T>::type
+pop_count(T in) {
   // TODO, use __builtin_popcount() when available (gcc/clang)
   // or __popcnt16(), __popcnt(), __popcnt64() (MSVC)
   T pop;
@@ -27,14 +30,34 @@ template <typename T> T pop_count(T in) {
 
 // snoob - same number of one bits
 // (adapted from Fig 2-1 p 14 Hackers Delight 1st ed)
-// This increments index to the next larger integer containing the same
-// number of ones as index. When through all possible combinations, then
+// This increments in to the next larger integer containing the same
+// number of ones as in. When through all possible combinations, then
 // increase the number of one bits set
 // Uses N bits of in to express this
 //
-// This really should only exist for std::is_integral and std::is_unsigned
-// but those require C++11
-template <typename T> T snoob(T in, T N) {
+// There are two versions here. The one argument version assumes you want
+// the whole width of the type. The two argument version allows you to
+// specify using only some of the bits
+//
+// This only exists for types that are std::is_integral and std::is_unsigned
+template <typename T>
+typename std::enable_if<std::is_integral<T>::value &&std::is_unsigned<T>::value,
+                        T>::type
+snoob(T in) {
+  // Can't do this with in == 0, since would trigger division by zero
+  assert(in != 0);
+
+  T smallest = in & -in;
+  T ripple = in + smallest;
+  T ones = in ^ ripple;
+  ones = (ones >> 2) / smallest;
+  return ripple | ones;
+}
+
+template <typename T>
+typename std::enable_if<std::is_integral<T>::value &&std::is_unsigned<T>::value,
+                        T>::type
+snoob(T in, T N) {
   // Can't do this with in == 0, since would trigger division by zero
   assert(in != 0);
 
@@ -43,7 +66,7 @@ template <typename T> T snoob(T in, T N) {
   T ones = in ^ ripple;
   ones = (ones >> 2) / smallest;
 
-  if (ripple >= (1 << N)) {
+  if (ripple >= (static_cast<T>(1) << N)) {
     // Add in another bit
     ones = (ones << 2) | 3;
     ripple = 0;

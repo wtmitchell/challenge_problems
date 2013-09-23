@@ -14,7 +14,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 else()
   if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     # clang flags
-    set(CMAKE_CXX_FLAGS "-std=c++11 -Weverything -Wno-c++98-compat -Wno-padded")
+    set(CMAKE_CXX_FLAGS "-std=c++11 -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-padded")
 
     if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
