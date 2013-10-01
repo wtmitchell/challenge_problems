@@ -7,4 +7,7 @@ Feel free to look around, but if you just blindly use these answers, you're a ba
 
 Dependencies
 ------------
-* GMP
+* A recent C++ compiler
+* CMake
+* [GMP](http://gmplib.org)
+* Python
