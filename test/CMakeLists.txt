@@ -24,4 +24,5 @@ if("${CMAKE_C_COMPILER}" MATCHES "clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-global-constructors")
 endif()
 
+add_subdirectory(problems)
 add_subdirectory(util)
