@@ -1,5 +1,9 @@
 //===-- util/Timer.h - A simple timer ---------------------------*- C++ -*-===//
 //
+// ProjectEuler.net solutions by Will Mitchell
+//
+// This file is distributed under the MIT License. See LICENSE for details.
+//
 //===----------------------------------------------------------------------===//
 ///
 /// \file

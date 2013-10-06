@@ -1,3 +1,12 @@
+//===-- util/Timer.cpp - A simple timer -------------------------*- C++ -*-===//
+//
+// ProjectEuler.net solutions by Will Mitchell
+//
+// This file is distributed under the MIT License. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
+//===----------------------------------------------------------------------===//
 #include "util/Timer.h"
 
 #include <iostream>

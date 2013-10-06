@@ -1,3 +1,11 @@
+//===-- problems/Problem1.cpp - An invalid problem --------------*- C++ -*-===//
+//
+// ProjectEuler.net solutions by Will Mitchell
+//
+// This file is distributed under the MIT License. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+//
 /* Problem 1
  *
  * If we list all the natural numbers below 10 that are multiples of 3 or 5, we
@@ -5,6 +13,7 @@
  *
  * Find the sum of all the multiples of 3 or 5 below 1000.
  */
+//===----------------------------------------------------------------------===//
 #include "Problem1.h"
 
 #include <iostream>
