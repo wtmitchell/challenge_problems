@@ -43,7 +43,19 @@ enable_testing()
 # We require the GNU Multi-Precision library
 find_package(GMP)
 
+if (!GMP_FOUND)
+  message(FATAL_ERROR "GMP not found.")
+endif()
+
 add_subdirectory(lib)
 add_subdirectory(test)
 add_subdirectory(util)
 
+# Documentation must be explicitly requested
+add_subdirectory(docs EXCLUDE_FROM_ALL)
+
+# Target for checking format via clang-format
+file(GLOB_RECURSE files apps/*/*.cpp include/*/*.h lib/*/*.cpp test/*.h test/*/*.cpp test/*/*.h)
+add_custom_command(OUTPUT formatcheck COMMAND
+  ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_format.sh ${files})
+add_custom_target(check-format DEPENDS formatcheck)
