@@ -7,7 +7,7 @@
 //===----------------------------------------------------------------------===//
 ///
 /// \file
-/// \brief This file defines basic routines for bit manipulation
+/// \brief Defines a factory for Problem objects
 ///
 //===----------------------------------------------------------------------===//
 #ifndef FACTORY_H
@@ -15,11 +15,11 @@
 
 #include <functional>
 
-typedef std::function<void(void)> problem;
+typedef std::function<void(void)> Problem;
 
 namespace problems {
 namespace Factory {
-problem single_problem(unsigned int num);
+Problem single_problem(unsigned int num);
 }
 }
 

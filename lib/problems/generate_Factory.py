@@ -36,8 +36,8 @@ def print_single_problem(out, problems):
     indent2 = indent + indent
     indent3 = indent2 + indent
 
-    out.write("problem problems::Factory::single_problem(unsigned int num) {\n" +
-              indent + "problem p;\n\n" +
+    out.write("Problem problems::Factory::single_problem(unsigned int num) {\n" +
+              indent + "Problem p;\n\n" +
               indent + "switch(num) {\n")
 
     for p in problems:
