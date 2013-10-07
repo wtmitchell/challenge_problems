@@ -37,7 +37,8 @@
 ///     + 5\frac{\lfloor\frac{n}{5}\rfloor(\lfloor\frac{n}{5}\rfloor+1)}{2}
 ///     - 15\frac{\lfloor\frac{n}{15}\rfloor(\lfloor\frac{n}{15}\rfloor+1)}{2}\\
 /// \f}
-/// Note that in the problem below 1000 implies we want to have n = 999
+/// Note that in the problem below 1000 implies we want to have n = 999, or
+/// simply substitute in n-1.
 //===----------------------------------------------------------------------===//
 #include "Problem1.h"
 
@@ -60,7 +61,7 @@ string problems::Problem1::answer() {
   return ss.str();
 }
 
-void problems::Problem1::solve() { sum = brute_force(1000); }
+void problems::Problem1::solve() { sum = faster(1000); }
 
 int problems::Problem1::brute_force(const int limit) {
   int s = 0;
@@ -72,5 +73,7 @@ int problems::Problem1::brute_force(const int limit) {
 }
 
 int problems::Problem1::faster(const int limit) {
-  return (limit - 1) * (7 * limit + 8) / 30;
+  return 3*( (limit - 1)/3 * ((limit - 1)/3 + 1) )/2
+    + 5*( (limit - 1)/5 * ((limit - 1)/5 + 1) )/2
+    - 15*( (limit - 1)/15 * ((limit - 1)/15 + 1) )/2;
 }
