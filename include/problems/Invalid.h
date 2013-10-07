@@ -1,4 +1,4 @@
-//===-- problems/Invalid.h - Default case from Factory -----------*- C++ -*-===//
+//===-- problems/Invalid.h - Default case from Factory ----------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //
@@ -8,14 +8,21 @@
 ///
 ///
 //===----------------------------------------------------------------------===//
-
 #ifndef PROBLEMS_INVALID_H
 #define PROBLEMS_INVALID_H
 
+#include <string>
+
+#include "Problem.h"
+
 namespace problems {
-namespace Invalid {
-void solve();
-}
+class Invalid : public Problem {
+public:
+  Invalid();
+  ~Invalid();
+  std::string answer();
+  void solve();
+};
 }
 
 #endif

@@ -6,6 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 ///
+/// \file
 /// \brief Base class for problems
 ///
 //===----------------------------------------------------------------------===//
@@ -16,10 +17,15 @@
 #include <string>
 
 namespace problems {
-  class Problem {
-    virtual std::string answer() = 0;
-    virtual void solve() = 0;
-  };
+/// Base class for problems
+class Problem {
+public:
+  virtual ~Problem();
+  /// Returns a user readable answer to the problem
+  virtual std::string answer() = 0;
+  /// Where the work of the problem is done
+  virtual void solve() = 0;
+};
 }
 
 #endif

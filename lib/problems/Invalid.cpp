@@ -9,11 +9,9 @@
 //===----------------------------------------------------------------------===//
 #include "problems/Invalid.h"
 
-#include <iostream>
-using std::cout;
-using std::endl;
+#include <string>
 
-void problems::Invalid::solve()
-{
-     cout << "Invalid problem number" << endl;
-}
+problems::Invalid::Invalid() {}
+problems::Invalid::~Invalid() {}
+std::string problems::Invalid::answer() { return "Invalid problem"; }
+void problems::Invalid::solve() {}

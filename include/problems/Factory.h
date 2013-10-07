@@ -13,13 +13,12 @@
 #ifndef FACTORY_H
 #define FACTORY_H
 
-#include <functional>
-
-typedef std::function<void(void)> Problem;
+#include <memory>
+#include "Problem.h"
 
 namespace problems {
 namespace Factory {
-Problem single_problem(unsigned int num);
+std::unique_ptr<Problem> create(unsigned int num);
 }
 }
 

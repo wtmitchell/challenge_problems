@@ -16,20 +16,32 @@
 //===----------------------------------------------------------------------===//
 #include "Problem1.h"
 
-#include <iostream>
-using std::cout;
-using std::endl;
+#include <sstream>
+using std::stringstream;
+#include <string>
+using std::string;
 
-void problems::Problem1::solve()
-{
-     int count = 0;
-     for (int i = 0; i < 1000; ++i)
-     {
-          if ((i % 3 == 0) || (i % 5 == 0))
-          {
-               count += i;
-          }
-     }
-     cout << "The sum of all the multiples of 3 or 5 below 1000 is "
-          << count << endl;
+problems::Problem1::Problem1() : sum(0), solved(false) {}
+problems::Problem1::~Problem1() {}
+
+string problems::Problem1::answer() {
+  if (!solved) solve();
+
+  stringstream ss;
+
+  ss << "Foo" << sum;
+
+  return ss.str();
+}
+
+void problems::Problem1::solve() { sum = brute_force(); }
+
+int problems::Problem1::brute_force() {
+  int s = 0;
+  for (int i = 0; i < 1000; ++i) {
+    if ((i % 3 == 0) || (i % 5 == 0)) {
+      s += i;
+    }
+  }
+  return s;
 }
