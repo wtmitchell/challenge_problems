@@ -1,4 +1,4 @@
-//===-- problems/Invalid.h - Default case from Factory ----------*- C++ -*-===//
+//===-- problems/Problem1.h - Problem 1 -------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //
@@ -6,6 +6,8 @@
 //
 //===----------------------------------------------------------------------===//
 ///
+/// \file
+/// \brief Problem1: Multiples of 3 and 5
 ///
 //===----------------------------------------------------------------------===//
 #ifndef PROBLEMS_PROBLEM1_H

@@ -7,5 +7,5 @@ TEST(Problem1, Basics) {
 
   Problem1 p1;
 
-  EXPECT_EQ(1, p1.brute_force());
+  EXPECT_EQ(233168, p1.brute_force());
 }
