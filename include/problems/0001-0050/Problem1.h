@@ -7,7 +7,7 @@
 //===----------------------------------------------------------------------===//
 ///
 /// \file
-/// \brief Problem1: Multiples of 3 and 5
+/// \brief Problem 1: Multiples of 3 and 5
 ///
 //===----------------------------------------------------------------------===//
 #ifndef PROBLEMS_PROBLEM1_H
@@ -25,7 +25,8 @@ public:
   std::string answer();
   void solve();
 
-  int brute_force();
+  int brute_force(const int limit);
+  int faster(const int limit);
 private:
   int sum;
   bool solved;
