@@ -3,8 +3,6 @@ using std::cerr;
 using std::cout;
 using std::endl;
 #include <stdexcept>
-using std::exception;
-using std::out_of_range;
 #include <string>
 using std::stoul;
 
@@ -26,12 +24,25 @@ int main(int argc, char **argv) {
     else
       all_problems();
   }
-  catch (out_of_range oor) {
+  catch (std::out_of_range e) {
     usage = true;
-    cerr << "Number too large.\n";
+    cerr << "Out of Range Exception: " << e.what() << "\n";
   }
-  catch (exception ia) {
+  catch (std::invalid_argument e) {
     usage = true;
+    cerr << "Invalid Argument Exception: " << e.what() << "\n";
+  }
+  catch (std::logic_error e) {
+    usage = true;
+    cerr << "Logic Error: " << e.what() << "\n";
+  }
+  catch (std::runtime_error e) {
+    usage = true;
+    cerr << "Runtime Error: " << e.what() << "\n";
+  }
+  catch (std::exception e) {
+    usage = true;
+    cerr << "Exception: " << e.what() << "\n";
   }
 
   if (usage) {
