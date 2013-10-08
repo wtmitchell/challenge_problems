@@ -30,6 +30,7 @@ public:
   int brute_force(const int limit);
   /// Faster analytic solution
   int faster(const int limit);
+
 private:
   /// Cached answer
   int sum;

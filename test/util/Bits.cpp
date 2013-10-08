@@ -16,7 +16,6 @@ TEST(BitsPopCount, Basics) {
   // 64 bits
   EXPECT_EQ(1ull, pop_count(0x8000000000000000ull));
   EXPECT_EQ(64ull, pop_count(0xffffffffffffffffull));
-
 }
 
 TEST(BitsSnoob, Basics) {
@@ -59,7 +58,7 @@ TEST(BitsSnoob, IncreaseBits32) {
   EXPECT_EQ(3, snoob(0x20000000u, 30u));
   EXPECT_EQ(3, snoob(0x40000000u, 31u));
   // Skip 32 since you bit shift out of MSB which is undefined
-  //EXPECT_EQ(3, snoob(0x80000000u, 32u));
+  // EXPECT_EQ(3, snoob(0x80000000u, 32u));
 }
 
 TEST(BitsSnoob, IncreaseBits64) {
@@ -127,6 +126,5 @@ TEST(BitsSnoob, IncreaseBits64) {
   EXPECT_EQ(3, snoob(0x2000000000000000ull, 62ull));
   EXPECT_EQ(3, snoob(0x4000000000000000ull, 63ull));
   // Skip 64 since you bit shift out of MSB which is undefined
-  //EXPECT_EQ(3, snoob(0x8000000000000000ull, 64ull));
+  // EXPECT_EQ(3, snoob(0x8000000000000000ull, 64ull));
 }
-

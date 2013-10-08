@@ -25,5 +25,6 @@ TEST(Problem2, ViaFactory) {
   p->solve();
 
   EXPECT_EQ("The sum of all even valued Fibonacci numbers below 4 million is"
-	    " 4613732", p->answer());
+            " 4613732",
+            p->answer());
 }

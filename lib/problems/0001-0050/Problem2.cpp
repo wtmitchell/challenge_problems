@@ -66,7 +66,8 @@ string problems::Problem2::answer() {
 
   stringstream ss;
 
-  ss << "The sum of all even valued Fibonacci numbers below 4 million is " << sum;
+  ss << "The sum of all even valued Fibonacci numbers below 4 million is "
+     << sum;
 
   return ss.str();
 }
@@ -74,7 +75,6 @@ string problems::Problem2::answer() {
 std::string problems::Problem2::description() const {
   return "Problem 2: Even Fibonacci numbers";
 }
-
 
 void problems::Problem2::solve() {
   sum = faster(4000000);
@@ -85,11 +85,11 @@ void problems::Problem2::solve() {
 unsigned int problems::Problem2::brute_force(const unsigned int limit) {
   unsigned int nm2 = 1; // n - 2
   unsigned int nm1 = 1; // n - 1
-  unsigned int n = 2; // n
+  unsigned int n = 2;   // n
   unsigned int s = 0;
 
   while (n < limit) {
-    if (n%2 == 0)
+    if (n % 2 == 0)
       s += n;
 
     nm2 = nm1;
@@ -105,7 +105,7 @@ unsigned int problems::Problem2::faster(const unsigned int limit) {
   unsigned int s = 0;
   unsigned int np3 = 2; // n + 3
   unsigned int np2 = 1; // n + 2
-  unsigned int n = 0; // n
+  unsigned int n = 0;   // n
   unsigned int nm1 = 0; // n - 1
 
   while (np3 < limit) {

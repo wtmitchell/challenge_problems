@@ -62,7 +62,6 @@ std::string problems::Problem1::description() const {
   return "Problem 1: Multiples of 3 and 5";
 }
 
-
 void problems::Problem1::solve() {
   sum = faster(1000);
   solved = true;
@@ -78,7 +77,7 @@ int problems::Problem1::brute_force(const int limit) {
 }
 
 int problems::Problem1::faster(const int limit) {
-  return 3*( (limit - 1)/3 * ((limit - 1)/3 + 1) )/2
-    + 5*( (limit - 1)/5 * ((limit - 1)/5 + 1) )/2
-    - 15*( (limit - 1)/15 * ((limit - 1)/15 + 1) )/2;
+  return 3 * ((limit - 1) / 3 * ((limit - 1) / 3 + 1)) / 2 +
+         5 * ((limit - 1) / 5 * ((limit - 1) / 5 + 1)) / 2 -
+         15 * ((limit - 1) / 15 * ((limit - 1) / 15 + 1)) / 2;
 }

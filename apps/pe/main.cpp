@@ -62,8 +62,7 @@ void all_problems() {
   for (const auto n : list) {
     auto p = problems::Factory::create(n);
     p->solve();
-    cout << p->description() << "\n"
-	 << p->answer() << "\n";
+    cout << p->description() << "\n" << p->answer() << "\n";
   }
   t.stop();
 
@@ -79,7 +78,6 @@ void one_problem(const unsigned long problem) {
   p->solve();
   t.stop();
 
-  cout << p->description() << "\n"
-       << p->answer() << "\n"
+  cout << p->description() << "\n" << p->answer() << "\n"
        << "Time elapsed: " << t << endl;
 }

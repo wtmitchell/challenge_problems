@@ -30,6 +30,7 @@ public:
   unsigned int brute_force(const unsigned int limit);
   /// Faster solution
   unsigned int faster(const unsigned int limit);
+
 private:
   /// Cached answer
   unsigned int sum;

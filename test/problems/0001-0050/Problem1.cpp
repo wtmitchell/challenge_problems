@@ -23,5 +23,5 @@ TEST(Problem1, ViaFactory) {
   p->solve();
 
   EXPECT_EQ("The sum of all multiples of 3 or 5 below 1000 is 233168",
-	    p->answer());
+            p->answer());
 }
