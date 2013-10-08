@@ -17,6 +17,7 @@
 #include <vector>
 
 namespace util {
+/// Generic Binary Search of a vector. Assumed vect is sorted
 template <typename T>
 typename std::vector<T>::size_type binary_search(const std::vector<T> &vect,
                                                  const T &target);

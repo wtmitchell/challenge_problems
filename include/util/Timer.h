@@ -37,28 +37,32 @@
 
 #if defined(CPP11_TIMING)
 #include <chrono>
-//typedef std::chrono::system_clock Clock;
 typedef std::chrono::high_resolution_clock Clock;
 #elif defined(POSIX_TIMING)
 #include <sys/time.h>
 #endif
 
 namespace util {
+/// A simple timer
 class Timer {
 public:
   friend std::ostream &operator<<(std::ostream &os, Timer &t);
 
   Timer();
 
+  /// Starts the timer
   void start();
+  /// Stops the timer
   void stop();
 
 private:
+  /// Potential states of the timer
   typedef enum {
     Uninitialized,
     Invalid,
     Valid
   } timer_status;
+  /// Current state of the timer
   timer_status elapsed_valid;
 
 #if defined(CPP11_TIMING)
@@ -72,6 +76,7 @@ private:
   suseconds_t useconds;
 #endif
 };
+/// Prints out the time tracked by the Timer t
 std::ostream &operator<<(std::ostream &os, Timer &t);
 }
 #endif

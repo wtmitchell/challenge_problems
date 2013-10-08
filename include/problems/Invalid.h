@@ -6,6 +6,8 @@
 //
 //===----------------------------------------------------------------------===//
 ///
+/// \file
+/// \brief Default class for an invalid problem number
 ///
 //===----------------------------------------------------------------------===//
 #ifndef PROBLEMS_INVALID_H
@@ -16,6 +18,7 @@
 #include "Problem.h"
 
 namespace problems {
+/// Default class for an invalid problem number
 class Invalid : public Problem {
 public:
   Invalid();

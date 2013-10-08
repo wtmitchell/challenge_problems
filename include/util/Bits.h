@@ -18,6 +18,7 @@
 
 namespace util {
 // This only exists for types that are std::is_integral and std::is_unsigned
+/// Population Count of the parameter
 template <typename T>
 typename std::enable_if<std::is_integral<T>::value &&std::is_unsigned<T>::value,
                         T>::type
@@ -32,7 +33,7 @@ pop_count(T in) {
   return pop;
 }
 
-// snoob - same number of one bits
+///  Same Number of One Bits - restricted width
 // (adapted from Fig 2-1 p 14 Hackers Delight 1st ed)
 // This increments in to the next larger integer containing the same
 // number of ones as in. When through all possible combinations, then
@@ -58,6 +59,7 @@ snoob(T in) {
   return ripple | ones;
 }
 
+/// Same Number of One Bits - full width of type
 template <typename T>
 typename std::enable_if<std::is_integral<T>::value &&std::is_unsigned<T>::value,
                         T>::type

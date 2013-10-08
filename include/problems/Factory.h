@@ -19,7 +19,9 @@
 
 namespace problems {
 namespace Factory {
+/// Returns an instance of the requested problem
 std::unique_ptr<Problem> create(unsigned long num);
+/// Returns a list of all problems
 std::vector<unsigned long> list();
 }
 }

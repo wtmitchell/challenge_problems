@@ -26,10 +26,14 @@ public:
   std::string description() const;
   void solve();
 
+  /// Brute force solution
   int brute_force(const int limit);
+  /// Faster analytic solution
   int faster(const int limit);
 private:
+  /// Cached answer
   int sum;
+  /// If cached answer is valid
   bool solved;
 };
 }

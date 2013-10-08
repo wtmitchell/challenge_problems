@@ -13,6 +13,10 @@
 #ifndef UTIL_TYPES_H_INCLUDED
 #define UTIL_TYPES_H_INCLUDED
 
+/// Platform specific byte type
+///
+/// chars are not necessarily unsigned, so we specify it when we want bytes for
+/// bit manipulation.
 typedef unsigned char byte;
 
 #endif
