@@ -4,6 +4,7 @@ set(TEST_LINK_COMPONENTS
 
 set(problemSources
   0001-0050/Problem1.cpp
+  0001-0050/Problem2.cpp
   )
 
 add_unittest(problemsTests
