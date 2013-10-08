@@ -13,8 +13,7 @@ int main(int argc, char **argv) {
   Timer t;
 
   t.start();
-  for (int i = 0; i < 1000000; ++i)
-    problem->solve();
+  problem->solve();
   t.stop();
 
   cout << problem->answer() << endl;
