@@ -58,6 +58,11 @@ string problems::Problem1::answer() {
   return ss.str();
 }
 
+std::string problems::Problem1::description() const {
+  return "Problem 1: Multiples of 3 and 5";
+}
+
+
 void problems::Problem1::solve() {
   sum = faster(1000);
   solved = true;

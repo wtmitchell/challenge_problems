@@ -21,6 +21,7 @@ public:
   Invalid();
   ~Invalid();
   std::string answer();
+  std::string description() const;
   void solve();
 };
 }

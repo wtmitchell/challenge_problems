@@ -23,6 +23,8 @@ public:
   virtual ~Problem();
   /// Returns a user readable answer to the problem
   virtual std::string answer() = 0;
+  /// Returns a brief description of the problem
+  virtual std::string description() const = 0;
   /// Where the work of the problem is done
   virtual void solve() = 0;
 };

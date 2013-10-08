@@ -23,6 +23,7 @@ public:
   Problem1() : sum(0), solved(false) {}
   ~Problem1() = default;
   std::string answer();
+  std::string description() const;
   void solve();
 
   int brute_force(const int limit);

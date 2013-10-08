@@ -14,4 +14,5 @@
 problems::Invalid::Invalid() {}
 problems::Invalid::~Invalid() {}
 std::string problems::Invalid::answer() { return "Invalid problem"; }
+std::string problems::Invalid::description() const { return "Problem ??: Invalid"; }
 void problems::Invalid::solve() {}
