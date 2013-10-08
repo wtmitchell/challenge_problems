@@ -37,7 +37,8 @@
 
 #if defined(CPP11_TIMING)
 #include <chrono>
-typedef std::chrono::system_clock Clock;
+//typedef std::chrono::system_clock Clock;
+typedef std::chrono::high_resolution_clock Clock;
 #elif defined(POSIX_TIMING)
 #include <sys/time.h>
 #endif
