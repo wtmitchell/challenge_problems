@@ -47,9 +47,6 @@ using std::stringstream;
 #include <string>
 using std::string;
 
-problems::Problem1::Problem1() : sum(0), solved(false) {}
-problems::Problem1::~Problem1() {}
-
 string problems::Problem1::answer() {
   if (!solved)
     solve();
@@ -61,7 +58,10 @@ string problems::Problem1::answer() {
   return ss.str();
 }
 
-void problems::Problem1::solve() { sum = faster(1000); }
+void problems::Problem1::solve() {
+  sum = faster(1000);
+  solved = true;
+}
 
 int problems::Problem1::brute_force(const int limit) {
   int s = 0;

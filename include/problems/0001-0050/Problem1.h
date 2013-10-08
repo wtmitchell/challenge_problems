@@ -20,8 +20,8 @@
 namespace problems {
 class Problem1 : public Problem {
 public:
-  Problem1();
-  ~Problem1();
+  Problem1() : sum(0), solved(false) {}
+  ~Problem1() = default;
   std::string answer();
   void solve();
 
