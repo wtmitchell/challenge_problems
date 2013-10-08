@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import re
@@ -76,12 +76,13 @@ def print_list(out, problems):
 
 def make_Factory(args):
     if len(args) != 3:
-        print "Invalid usage. First arg is out directory, second arg is source directory"
-        print "args: " + str(args)
+        print("Invalid usage. First arg is out directory, second arg is source directory")
+        print("args: " + str(args))
         sys.exit(1)
 
     out_dir = args[1] + "/"
     problems = get_list_of_problems(args[2])
+    problems.sort()
 
     out = open(out_dir + "Factory.cpp", 'w')
     print_header(out)
