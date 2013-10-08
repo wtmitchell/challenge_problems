@@ -18,7 +18,7 @@
 
 namespace problems {
 namespace Factory {
-std::unique_ptr<Problem> create(unsigned int num);
+std::unique_ptr<Problem> create(unsigned long num);
 }
 }
 

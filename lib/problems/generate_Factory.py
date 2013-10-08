@@ -39,7 +39,7 @@ def print_create(out, problems):
     indent2 = indent + indent
     indent3 = indent2 + indent
 
-    out.write("std::unique_ptr<Problem> problems::Factory::create(unsigned int num) {\n" +
+    out.write("std::unique_ptr<Problem> problems::Factory::create(unsigned long num) {\n" +
               indent + "switch(num) {\n")
 
     for p in problems:
