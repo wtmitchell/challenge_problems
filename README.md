@@ -10,4 +10,5 @@ Dependencies
 * A recent C++ compiler
 * CMake
 * [GMP](http://gmplib.org)
-* Python
+* Python3
+* Doxygen
