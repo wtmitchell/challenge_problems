@@ -27,7 +27,11 @@ def print_header(out):
               "#include \"problems/Invalid.h\"\n" +
               "#include \"problems/Problem.h\"\n" +
               "using problems::Problem;\n" +
-              "#include \"util/Pointers.h\"\n\n")
+              "#include \"util/Pointers.h\"\n" +
+              "\n" +
+              "#include <memory>\n" +
+              "#include <vector>\n" +
+              "\n")
 
 def print_includes(out, problems):
     for p in problems:
@@ -54,6 +58,21 @@ def print_create(out, problems):
 
     out.write("}\n")
 
+def print_list(out, problems):
+    indent = "  "
+    indent2 = indent + indent
+    indent3 = indent2 + indent
+
+    out.write("std::vector<unsigned long> problems::Factory::list() {\n" +
+              indent + "std::vector<unsigned long> v;\n" +
+              indent + "v.reserve(" + str(len(problems)) + ");\n" +
+              "\n")
+
+    for p in problems:
+        out.write(indent + "v.push_back(" + str(p[0]) + ");\n")
+
+    out.write("\n" + indent + "return v;\n" +
+              "}\n")
 
 def make_Factory(args):
     if len(args) != 3:
@@ -68,6 +87,7 @@ def make_Factory(args):
     print_header(out)
     print_includes(out, problems)
     print_create(out, problems)
+    print_list(out, problems)
     out.write("\n")
     out.close()
 

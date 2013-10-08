@@ -14,11 +14,13 @@
 #define FACTORY_H
 
 #include <memory>
+#include <vector>
 #include "Problem.h"
 
 namespace problems {
 namespace Factory {
 std::unique_ptr<Problem> create(unsigned long num);
+std::vector<unsigned long> list();
 }
 }
 
