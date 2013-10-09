@@ -198,7 +198,12 @@ TEST(Prime, isPrimeAugmented) {
 
   // Check for every prime below 1000 verified above and 500 overflow
   for (unsigned i = 0; i < 1500; ++i)
-    EXPECT_EQ(isPrime(i), isPrime(i, v));
+    EXPECT_EQ(isPrime(i), isPrime(i, v)) << "i = " << i;
+
+  // Check in a range where need to resort to trial division
+  v = primesAtMost(100u);
+  for (unsigned i = 10000; i < 11000; ++i)
+    EXPECT_EQ(isPrime(i), isPrime(i, v)) << "i = " << i;
 }
 
 TEST(Prime, primeDivisors) {
