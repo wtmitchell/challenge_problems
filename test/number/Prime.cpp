@@ -193,7 +193,7 @@ TEST(Prime, isPrime) {
   EXPECT_TRUE(isPrime(997));
 }
 
-TEST(Primes, isPrimeAugmented) {
+TEST(Prime, isPrimeAugmented) {
   auto v = primesAtMost(1000u);
 
   for (unsigned i = 0; i < 10000; ++i) {
@@ -204,7 +204,7 @@ TEST(Primes, isPrimeAugmented) {
   }
 }
 
-TEST(Primes, primeDivisors) {
+TEST(Prime, primeDivisors) {
   vector<unsigned long long> knownFactors;
 
   knownFactors.push_back(2);
@@ -241,7 +241,7 @@ TEST(Primes, primeDivisors) {
   EXPECT_EQ(knownFactors, primeDivisors(4ull * 25ull * 121ull * 101ull));
 }
 
-TEST(Primes, primesAtMost) {
+TEST(Prime, primesAtMost) {
 
   // Check through primes up to 10
   vector<unsigned int> knownPrimes;
