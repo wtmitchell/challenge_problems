@@ -116,5 +116,6 @@ unsigned int problems::Problem2::faster(const unsigned int limit) {
     np2 = 2 * n + nm1;
     np3 = 3 * n + 2 * nm1;
   }
+
   return s;
 }
