@@ -27,6 +27,12 @@ template <class T> bool isPrime(const T candidate, const std::vector<T> primes);
 /// Returns a vector of the prime divisors of the argument
 template <class T> std::vector<T> primeDivisors(const T u);
 
+/// Returns a vector of the prime divisors of the argument. Using a list of
+/// primes to accelerate the divisor checks. Assumes primes contains at least 2,
+/// 3, and 5
+template <class T>
+std::vector<T> primeDivisors(const T u, const std::vector<T> primes);
+
 /// Returns a vector of primes at most bound
 template <class T> std::vector<T> primesAtMost(const T bound);
 }
@@ -45,14 +51,14 @@ template <class T> bool number::isPrime(const T candidate) {
       candidate % static_cast<T>(5) == static_cast<T>(0))
     return false;
 
-  // Primes are +/- 1 mod 6, so we can skip 2 then 4
-  for (T i = static_cast<T>(5); i * i <= candidate;) {
-    i += static_cast<T>(2);
+  // Primes are +/- 1 mod 6, so we can skip 4 then 2
+  for (T i = static_cast<T>(7); i * i <= candidate;) {
     if (candidate % i == 0)
       return false;
     i += static_cast<T>(4);
     if (candidate % i == 0)
       return false;
+    i += static_cast<T>(2);
   }
 
   // If we haven't found a divisor so far, it must be prime
@@ -79,63 +85,96 @@ bool number::isPrime(const T candidate, const std::vector<T> primes) {
   T p = *primes.rbegin();
 
   // Get on +2 / +4 cycle
-  if (p % static_cast<T>(6) == static_cast<T>(1)) {
+  if (p % static_cast<T>(6) == static_cast<T>(1))
     p += static_cast<T>(4);
+
+  // Continue on +2 / +4 cycle
+  while (p * p <= candidate) {
     if (candidate % p == static_cast<T>(0))
       return false;
-  }
-  // Continue on +2  +4 cycle
-  while (p * p <= candidate) {
     p += static_cast<T>(2);
     if (candidate % p == static_cast<T>(0))
       return false;
     p += static_cast<T>(4);
-    if (candidate % p == static_cast<T>(0))
-      return false;
   }
 
   // If we haven't found a divisor so far, it must be prime
   return true;
 }
 
-template <class T> std::vector<T> number::primeDivisors(const T number) {
-  std::vector<T> divisors;
-  T n = number;
-
-// Create a convenience macro to prevent excess duplicate code
+// Create a convenience macro to prevent excess duplicate code in primeDivisors
 /// \cond Suppress Doxygen warning
-#define PROCESS(i)                                                             \
+#define PROCESS_DIVISOR(i)                                                     \
   if (n % static_cast<T>(i) == static_cast<T>(0)) {                            \
     divisors.push_back(static_cast<T>(i));                                     \
     do                                                                         \
       n /= static_cast<T>(i);                                                  \
     while (n % static_cast<T>(i) == static_cast<T>(0));                        \
   }
-  /// \endcond
+/// \endcond
+
+template <class T> std::vector<T> number::primeDivisors(const T number) {
+  std::vector<T> divisors;
+  T n = number;
 
   // Individually check the first few primes until we are past 6
-  PROCESS(2);
-  PROCESS(3);
-  PROCESS(5);
+  PROCESS_DIVISOR(2);
+  PROCESS_DIVISOR(3);
+  PROCESS_DIVISOR(5);
 
-  // Primes are +/- 1 mod 6, so we can skip 2 then 4
-  for (T i = static_cast<T>(5); i * i < number;) {
-    i += static_cast<T>(2);
-    PROCESS(i);
+  // Primes are +/- 1 mod 6, so we can skip 4 then 2
+  for (T i = static_cast<T>(7); i * i <= n;) {
+    PROCESS_DIVISOR(i);
     i += static_cast<T>(4);
-    PROCESS(i);
+    PROCESS_DIVISOR(i);
+    i += static_cast<T>(2);
   }
 
-// Limit the scope of our macro
-#undef PROCESS
-
-  if (n != static_cast<T>(1)) {
-    // The remaining part of n is prime
+  // The remaining part of n is prime
+  if (n != static_cast<T>(1))
     divisors.push_back(n);
-  }
 
   return divisors;
 }
+
+template <class T>
+std::vector<T> number::primeDivisors(const T number,
+                                     const std::vector<T> primes) {
+  std::vector<T> divisors;
+  T n = number;
+
+  // Check the primes in the known list
+  for (const auto i : primes) {
+    PROCESS_DIVISOR(i);
+
+    // Check if we found all the factors
+    if (n == static_cast<T>(1))
+      return divisors;
+  }
+
+  // Get on +2 / +4 cycle
+  T p = *primes.rbegin();
+
+  if (p % static_cast<T>(6) == static_cast<T>(1))
+    p += static_cast<T>(4);
+
+  // Primes are +/- 1 mod 6, so we can skip 2 then 4
+  while (p * p <= n) {
+    PROCESS_DIVISOR(p);
+    p += static_cast<T>(2);
+    PROCESS_DIVISOR(p);
+    p += static_cast<T>(4);
+  }
+
+  // The remaining part of n is prime
+  if (n != static_cast<T>(1))
+    divisors.push_back(n);
+
+  return divisors;
+}
+
+// Limit the scope of our macro
+#undef PROCESS_DIVISOR
 
 // Uses the Sieve of Eratosthenes
 template <class T> std::vector<T> number::primesAtMost(const T bound) {

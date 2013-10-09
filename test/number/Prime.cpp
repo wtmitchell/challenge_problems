@@ -243,6 +243,20 @@ TEST(Prime, primeDivisors) {
   EXPECT_EQ(knownFactors, primeDivisors(4ull * 25ull * 121ull * 101ull));
 }
 
+TEST(Prime, primeDivisorsAugmented) {
+  auto v = primesAtMost(500u);
+
+  // Check completely within range of primes
+  for (unsigned i = 2; i < 500; ++i)
+    EXPECT_EQ(primeDivisors(i), primeDivisors(i, v)) << "i = " << i;
+
+  // Check in a range where need to resort to trial division
+  v = primesAtMost(50u);
+  for (unsigned i = 1000; i < 1100; ++i)
+    EXPECT_EQ(primeDivisors(i), primeDivisors(i, v)) << "i = " << i;
+}
+
+
 TEST(Prime, primesAtMost) {
 
   // Check through primes up to 10
