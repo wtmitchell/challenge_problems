@@ -196,7 +196,8 @@ TEST(Prime, isPrime) {
 TEST(Prime, isPrimeAugmented) {
   auto v = primesAtMost(1000u);
 
-  for (unsigned i = 0; i < 10000; ++i)
+  // Check for every prime below 1000 verified above and 500 overflow
+  for (unsigned i = 0; i < 1500; ++i)
     EXPECT_EQ(isPrime(i), isPrime(i, v));
 }
 
