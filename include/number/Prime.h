@@ -21,7 +21,7 @@ namespace number {
 template <class T> bool isPrime(const T candidate);
 
 /// Determines whether a number is prime by using a sorted list of primes, then
-/// trial division
+/// trial division. Assumes primes contains at least 2, 3, and 5
 template <class T> bool isPrime(const T candidate, const std::vector<T> primes);
 
 /// Returns a vector of the prime divisors of the argument
@@ -65,12 +65,37 @@ bool number::isPrime(const T candidate, const std::vector<T> primes) {
   if (candidate < static_cast<T>(2))
     return false;
 
-  // Small enough that we can look up
-  if (candidate < *primes.rbegin())
+  // Small enough that we can look up in the list
+  if (candidate <= *primes.rbegin())
     return std::binary_search(primes.begin(), primes.end(), candidate);
 
-  // Naively decide by trial division
-  return number::isPrime<T>(candidate);
+  // Check if any of the known primes are divisors
+  for (const auto i : primes) {
+    if (candidate % i == static_cast<T>(0))
+      return false;
+  }
+
+  // Resort to trial division
+  T p = *primes.rbegin();
+
+  // Get on +2 / +4 cycle
+  if (p % static_cast<T>(6) == static_cast<T>(1)) {
+    p += static_cast<T>(4);
+    if (candidate % p == static_cast<T>(0))
+      return false;
+  }
+  // Continue on +2  +4 cycle
+  while (p * p <= candidate) {
+    p += static_cast<T>(2);
+    if (candidate % p == static_cast<T>(0))
+      return false;
+    p += static_cast<T>(4);
+    if (candidate % p == static_cast<T>(0))
+      return false;
+  }
+
+  // If we haven't found a divisor so far, it must be prime
+  return true;
 }
 
 template <class T> std::vector<T> number::primeDivisors(const T number) {
@@ -78,6 +103,7 @@ template <class T> std::vector<T> number::primeDivisors(const T number) {
   T n = number;
 
 // Create a convenience macro to prevent excess duplicate code
+/// \cond Suppress Doxygen warning
 #define PROCESS(i)                                                             \
   if (n % static_cast<T>(i) == static_cast<T>(0)) {                            \
     divisors.push_back(static_cast<T>(i));                                     \
@@ -85,6 +111,7 @@ template <class T> std::vector<T> number::primeDivisors(const T number) {
       n /= static_cast<T>(i);                                                  \
     while (n % static_cast<T>(i) == static_cast<T>(0));                        \
   }
+  /// \endcond
 
   // Individually check the first few primes until we are past 6
   PROCESS(2);
