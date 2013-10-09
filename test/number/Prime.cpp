@@ -233,6 +233,12 @@ TEST(Primes, primeDivisors) {
   EXPECT_EQ(knownFactors, primeDivisors(2ull * 5ull * 11ull));
   EXPECT_EQ(knownFactors, primeDivisors(4ull * 5ull * 121ull));
   EXPECT_EQ(knownFactors, primeDivisors(4ull * 25ull * 121ull));
+
+  knownFactors.push_back(101);
+
+  EXPECT_EQ(knownFactors, primeDivisors(2ull * 5ull * 11ull * 101ull));
+  EXPECT_EQ(knownFactors, primeDivisors(4ull * 5ull * 121ull * 101ull));
+  EXPECT_EQ(knownFactors, primeDivisors(4ull * 25ull * 121ull * 101ull));
 }
 
 TEST(Primes, primesAtMost) {
