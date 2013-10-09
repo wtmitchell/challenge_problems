@@ -196,12 +196,8 @@ TEST(Prime, isPrime) {
 TEST(Prime, isPrimeAugmented) {
   auto v = primesAtMost(1000u);
 
-  for (unsigned i = 0; i < 10000; ++i) {
-    if (isPrime(i))
-      EXPECT_TRUE(isPrime(i, v));
-    else
-      EXPECT_FALSE(isPrime(i, v));
-  }
+  for (unsigned i = 0; i < 10000; ++i)
+    EXPECT_EQ(isPrime(i), isPrime(i, v));
 }
 
 TEST(Prime, primeDivisors) {
