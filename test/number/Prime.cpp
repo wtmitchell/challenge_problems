@@ -256,7 +256,6 @@ TEST(Prime, primeDivisorsAugmented) {
     EXPECT_EQ(primeDivisors(i), primeDivisors(i, v)) << "i = " << i;
 }
 
-
 TEST(Prime, primesAtMost) {
 
   // Check through primes up to 10
