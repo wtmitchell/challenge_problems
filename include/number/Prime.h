@@ -196,7 +196,7 @@ template <class T> std::vector<T> number::primesAtMost(const T bound) {
     // Sift out the multiples of p
     // Advancing by p each time is equivalent to adding 2p, which leads to the
     // next odd multiple
-    for (auto j = i + p; j <= bound / 2; j += p)
+    for (auto j = i + p, e = sieve.size(); j < e; j += p)
       sieve[j] = false;
 
     // Find the next prime
