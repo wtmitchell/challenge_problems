@@ -1,4 +1,4 @@
-//===-- util/Pointers.h - Pointer conveniences ----------------*- C++ -*---===//
+//===-- util/Pointers.h ---------------------------------------*- C++ -*---===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

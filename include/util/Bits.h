@@ -1,4 +1,4 @@
-//===-- util/Bits.h - Common bit manipulation routines ----------*- C++ -*-===//
+//===-- util/Bits.h ---------------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

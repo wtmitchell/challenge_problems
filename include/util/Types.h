@@ -1,4 +1,4 @@
-//===-- util/Types.h - Basic types used in the project ----------*- C++ -*-===//
+//===-- util/Types.h --------------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

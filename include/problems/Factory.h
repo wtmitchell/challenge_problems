@@ -1,4 +1,4 @@
-//===-- problem/Factory.h - Factory to create problem instances--*- C++ -*-===//
+//===-- problem/Factory.h ---------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

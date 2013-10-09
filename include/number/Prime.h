@@ -1,4 +1,4 @@
-//===-- number/Primes.h ------------------------------ ----------*- C++ -*-===//
+//===-- number/Primes.h -----------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

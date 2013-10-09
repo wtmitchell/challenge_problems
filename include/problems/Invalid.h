@@ -1,4 +1,4 @@
-//===-- problems/Invalid.h - Default case from Factory ----------*- C++ -*-===//
+//===-- problems/Invalid.h --------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

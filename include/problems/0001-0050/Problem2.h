@@ -1,4 +1,4 @@
-//===-- problems/Problem2.h - Problem 2 -------------------------*- C++ -*-===//
+//===-- problems/Problem2.h -------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

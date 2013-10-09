@@ -1,4 +1,4 @@
-//===-- problems/Problem.h - Base class for problems ------------*- C++ -*-===//
+//===-- problems/Problem.h --------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

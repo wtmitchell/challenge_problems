@@ -1,4 +1,4 @@
-//===-- util/Timer.h - A simple timer ---------------------------*- C++ -*-===//
+//===-- util/Timer.h --------------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //

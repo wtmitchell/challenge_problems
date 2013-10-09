@@ -1,4 +1,4 @@
-//===-- util/Timer.cpp - A simple timer -------------------------*- C++ -*-===//
+//===-- util/Timer.cpp ------------------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //
