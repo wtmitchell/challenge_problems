@@ -1,4 +1,4 @@
-//===-- problems/Problem2.cpp - An invalid problem --------------*- C++ -*-===//
+//===-- problems/Problem2.cpp -----------------------------------*- C++ -*-===//
 //
 // ProjectEuler.net solutions by Will Mitchell
 //
