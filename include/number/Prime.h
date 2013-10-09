@@ -24,16 +24,16 @@ template <class T> bool isPrime(const T candidate);
 /// trial division. Assumes primes contains at least 2, 3, and 5
 template <class T> bool isPrime(const T candidate, const std::vector<T> primes);
 
-/// Returns a vector of the prime divisors of the argument
+/// Returns a sorted vector of the prime divisors of the argument
 template <class T> std::vector<T> primeDivisors(const T u);
 
-/// Returns a vector of the prime divisors of the argument. Using a list of
-/// primes to accelerate the divisor checks. Assumes primes contains at least 2,
-/// 3, and 5
+/// Returns a vector of the prime divisors of the argument. Using a sorted list
+/// of primes to accelerate the divisor checks. Assumes primes contains at least
+/// 2, 3, and 5
 template <class T>
 std::vector<T> primeDivisors(const T u, const std::vector<T> primes);
 
-/// Returns a vector of primes at most bound
+/// Returns a sorted vector of primes at most bound
 template <class T> std::vector<T> primesAtMost(const T bound);
 }
 
