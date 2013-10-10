@@ -2,6 +2,7 @@ set(problem_files
   0001-0050/Problem1.cpp
   0001-0050/Problem2.cpp
   0001-0050/Problem3.cpp
+  0001-0050/Problem4.cpp
   )
 
 include_directories(${PROJECT_SOURCE_DIR}/include/problems/0001-0050)
