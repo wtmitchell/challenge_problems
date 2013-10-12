@@ -34,7 +34,7 @@ string problems::Problem4::answer() {
   stringstream ss;
 
   ss << "The largest palindrome that is a product of two 3-digit numbers is "
-     << factor1 << " * " << factor2 << " = " << factor1 * factor2;
+     << factor1 << " * " << factor2 << " = " << factor1 *factor2;
 
   return ss.str();
 }

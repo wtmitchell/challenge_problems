@@ -31,8 +31,7 @@ string problems::Problem3::answer() {
 
   stringstream ss;
 
-  ss << "The largest prime factor of the number 600851475143 is "
-     << factor;
+  ss << "The largest prime factor of the number 600851475143 is " << factor;
 
   return ss.str();
 }
