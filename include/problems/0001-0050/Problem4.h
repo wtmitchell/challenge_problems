@@ -29,6 +29,7 @@ public:
 private:
   /// Cached answer
   unsigned int factor1;
+  /// Cached answer
   unsigned int factor2;
   /// If cached answer is valid
   bool solved;
