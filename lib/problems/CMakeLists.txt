@@ -3,6 +3,7 @@ set(problem_files
   0001-0050/Problem2.cpp
   0001-0050/Problem3.cpp
   0001-0050/Problem4.cpp
+  0001-0050/Problem5.cpp
   )
 
 include_directories(${PROJECT_SOURCE_DIR}/include/problems/0001-0050)
@@ -24,3 +25,5 @@ add_library(problems
   ${problem_files}
   ${gen_files}
   )
+
+target_link_libraries(problems gmpxx gmp)
