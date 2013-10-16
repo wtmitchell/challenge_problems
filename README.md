@@ -17,9 +17,9 @@ Build
 -----
 Should be straight forward if the dependencies are installed.
 
-> cmake path/to/src
-> make -j 7
-> make test
+    cmake path/to/src
+    make -j 7
+    make test
 
 Executables created
 -------------------
