@@ -45,6 +45,7 @@ using std::stringstream;
 #include <string>
 using std::string;
 
+/// \cond Suppress Doxygen warning
 namespace {
 const auto numbers =
     "73167176531330624919225119674426574742355349194934969835203127745063262395"
@@ -62,6 +63,7 @@ const auto numbers =
     "91256071760605886116467109405077541002256983155200055935729725716362695618"
     "82670428252483600823257530420752963450";
 }
+/// \endcond
 
 string problems::Problem8::answer() {
   if (!solved)
