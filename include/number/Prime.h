@@ -22,7 +22,8 @@ template <class T> bool isPrime(const T candidate);
 
 /// Determines whether a number is prime by using a sorted list of primes, then
 /// trial division. Assumes primes contains at least 2, 3, and 5
-template <class T> bool isPrime(const T candidate, const std::vector<T> primes);
+template <class T>
+bool isPrime(const T candidate, const std::vector<T> &primes);
 
 /// Returns a sorted vector of the prime divisors of the argument
 template <class T> std::vector<T> primeDivisors(const T u);
@@ -31,7 +32,7 @@ template <class T> std::vector<T> primeDivisors(const T u);
 /// of primes to accelerate the divisor checks. Assumes primes contains at least
 /// 2, 3, and 5
 template <class T>
-std::vector<T> primeDivisors(const T u, const std::vector<T> primes);
+std::vector<T> primeDivisors(const T u, const std::vector<T> &primes);
 
 /// Returns a sorted vector of primes at most bound
 template <class T> std::vector<T> primesAtMost(const T bound);
@@ -66,7 +67,7 @@ template <class T> bool number::isPrime(const T candidate) {
 }
 
 template <class T>
-bool number::isPrime(const T candidate, const std::vector<T> primes) {
+bool number::isPrime(const T candidate, const std::vector<T> &primes) {
   // Prime numbers are positive and greater than 1
   if (candidate < static_cast<T>(2))
     return false;
@@ -139,7 +140,7 @@ template <class T> std::vector<T> number::primeDivisors(const T number) {
 
 template <class T>
 std::vector<T> number::primeDivisors(const T number,
-                                     const std::vector<T> primes) {
+                                     const std::vector<T> &primes) {
   std::vector<T> divisors;
   T n = number;
 
