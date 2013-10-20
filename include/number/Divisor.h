@@ -13,7 +13,6 @@
 #ifndef NUMBER_DIVISOR_H_INCLUDED
 #define NUMBER_DIVISOR_H_INCLUDED
 
-#include <algorithm>
 #include <vector>
 
 namespace number {
