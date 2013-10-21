@@ -1,4 +1,5 @@
 set(TEST_LINK_COMPONENTS
+  gmpxx gmp
   )
 
 set(numberSources
