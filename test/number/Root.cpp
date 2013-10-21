@@ -38,10 +38,10 @@ TEST(Root, isqrt) {
 
   mpz_class test("12345678901234567890123456789012345678901234567890");
   mpz_class testsq = test * test;
-  EXPECT_EQ(test - 1, isqrt<mpz_class>(testsq - 1));
-  EXPECT_EQ(test, isqrt(testsq));
-  EXPECT_EQ(test, isqrt<mpz_class>(testsq + 1));
-  EXPECT_EQ(test, isqrt<mpz_class>(testsq + 2));
-  EXPECT_EQ(test, isqrt<mpz_class>(testsq + 3));
-  EXPECT_EQ(test, isqrt<mpz_class>(testsq + 4));
+  EXPECT_EQ(test - 1, isqrt(mpz_class(testsq - 1)));
+  EXPECT_EQ(test, isqrt(mpz_class(testsq)));
+  EXPECT_EQ(test, isqrt(mpz_class(testsq + 1)));
+  EXPECT_EQ(test, isqrt(mpz_class(testsq + 2)));
+  EXPECT_EQ(test, isqrt(mpz_class(testsq + 3)));
+  EXPECT_EQ(test, isqrt(mpz_class(testsq + 4)));
 }

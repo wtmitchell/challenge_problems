@@ -18,7 +18,7 @@
 #include <gmpxx.h>
 
 namespace number {
-/// Integer Square Root
+/// Greatest integer at most square root of argument
 template <typename T> T isqrt(const T n);
 }
 
@@ -33,6 +33,8 @@ template <> mpz_class isqrt<mpz_class>(const mpz_class n) {
 namespace number {
 template <typename T>
 T isqrt(const T n) {
+  // This is a poor way to calculate in general. It suffers from accuracy
+  // errors when number can't be completely represented as a double
   return static_cast<T>(std::floor(std::sqrt(n)));
 }
 }
