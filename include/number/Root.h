@@ -22,6 +22,7 @@ namespace number {
 template <typename T> T isqrt(const T n);
 }
 
+// Specialization for GMP Integers
 namespace number {
 template <> mpz_class isqrt<mpz_class>(const mpz_class n) {
   mpz_class result;
