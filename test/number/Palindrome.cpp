@@ -6,7 +6,7 @@ using std::vector;
 #include "number/Palindrome.h"
 using number::isPalindrome;
 
-TEST(Palindrom, isPalindrome) {
+TEST(Palindrome, isPalindrome) {
   // Palindromes up to 500 from OEIS  A002113
   // With non-palindromes thrown in for up to 20
   EXPECT_TRUE(isPalindrome(0));
