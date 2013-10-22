@@ -22,13 +22,9 @@ namespace number {
 template <typename T> T isqrt(const T n);
 }
 
-// Specialization for GMP Integers
 namespace number {
-template <> mpz_class isqrt<mpz_class>(const mpz_class n) {
-  mpz_class result;
-  mpz_sqrt(result.get_mpz_t(), n.get_mpz_t());
-  return result;
-}
+  // Specialization for GMP Integers
+  template <> mpz_class isqrt<mpz_class>(const mpz_class n);
 
 // This is based on the simple binary search method in Hacker's Delight
 // 2nd ed by Henry Warren Jr. Fig 11-3 p 284
