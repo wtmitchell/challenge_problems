@@ -6,6 +6,7 @@ set(TEST_LINK_COMPONENTS
 set(numberSources
   Divisor.cpp
   Figurate.cpp
+  Limits.cpp
   Palindrome.cpp
   Prime.cpp
   Root.cpp

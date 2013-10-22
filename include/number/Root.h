@@ -17,14 +17,16 @@
 #include <type_traits>
 #include <gmpxx.h>
 
+#include "Limits.h"
+
 namespace number {
 /// Greatest integer at most square root of argument
 template <typename T> T isqrt(const T n);
 }
 
 namespace number {
-  // Specialization for GMP Integers
-  template <> mpz_class isqrt<mpz_class>(const mpz_class n);
+// Specialization for GMP Integers
+template <> mpz_class isqrt<mpz_class>(const mpz_class n);
 
 // This is based on the simple binary search method in Hacker's Delight
 // 2nd ed by Henry Warren Jr. Fig 11-3 p 284
@@ -33,47 +35,9 @@ template <typename T> T isqrt(const T n) {
   T a = static_cast<T>(1);
   T b = n / static_cast<T>(32) + static_cast<T>(8); // approximate initial guess
 
-  // clamp b to the largest the sqrt could ever be (such that b * b can be
-  // represented as type T)
-  if (std::is_unsigned<T>::value) {
-    if (b > (static_cast<T>(1) << sizeof(T) * 4) - static_cast<T>(1))
-      b = (static_cast<T>(1) << sizeof(T) * 4) - static_cast<T>(1);
-  } else {
-    // Work for some reasonable values for the signed case.
-    // TODO: Make this general
-    switch (sizeof(T)) {
-    case 1:       // 8-bit
-      if (b > 11) // floor(sqrt(2^7 -1))
-        b = 11;
-      break;
-    case 2: {      // 16-bit
-      if (b > 181) // floor(sqrt(2^15 - 1))
-        b = 181;
-      break;
-    }
-    case 4: {        // 32-bit
-      if (b > 46340) // floor(sqrt(2^31 - 1))
-        b = 46340;
-      break;
-    }
-    case 8: {             // 64-bit
-      if (b > 3037000499) // floor(sqrt(2^63 - 1))
-        b = 3037000499;
-      break;
-    }
-    /*
-  case 16: { // 128-bit
-    if (b > 13043817825332782212) // floor(sqrt(2^127 - 1))
-      b = 13043817825332782212;
-    break;
-  }
-    */
-    default:
-      // Quickly and obviously break things since we haven't planned for this
-      // situation
-      b = 1;
-    }
-  }
+  // clamp b to the largest the sqrt could ever be
+  if (b > number::maxSqrt<T>())
+    b = number::maxSqrt<T>();
 
   do {
     const T m = a + (b - a) / static_cast<T>(2);
