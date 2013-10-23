@@ -26,7 +26,9 @@ template <typename T> T isqrt(const T n);
 
 namespace number {
 // Specialization for GMP Integers
+/// \cond Suppress Doxygen warning
 template <> mpz_class isqrt<mpz_class>(const mpz_class n);
+/// \endcond
 
 // This is based on the simple binary search method in Hacker's Delight
 // 2nd ed by Henry Warren Jr. Fig 11-3 p 284

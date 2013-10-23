@@ -21,6 +21,8 @@ namespace number {
 template <typename T> T maxSqrt();
 }
 
+// Skip Doxygen for implementation details
+/// \cond Suppress Doxygen warning
 namespace number {
 template <typename T> struct maxSqrtUnsigned {
   const static T value =
@@ -85,4 +87,5 @@ template <typename T> struct maxSqrtImpl {
 
 template <typename T> T maxSqrt() { return maxSqrtImpl<T>::value; }
 }
+/// \endcond
 #endif
