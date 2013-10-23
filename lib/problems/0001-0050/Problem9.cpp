@@ -120,9 +120,12 @@ void problems::Problem9::solve() {
 
 unsigned problems::Problem9::bruteForce(const unsigned sum) {
   // WLOG, assume a < b
-  for (unsigned i = 1; i < sum; ++i) {
+  // By the triangle inequality we know that i is at most sum/3
+  // and must start at at least 3 since the smallest triple is (3,4,5)
+  for (unsigned i = 3; i < sum/3; ++i) {
     const auto isq = i * i;
-    for (unsigned j = i + 1; i + j < sum; ++j) {
+    // j can't be more than half of the remaining sum
+    for (unsigned j = i + 1, e = (sum - i) / 2; j <= e; ++j) {
       const auto k = sum - i - j;
 
       if (isq + j * j == k * k) {
