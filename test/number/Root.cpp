@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
 
-#include <vector>
-using std::vector;
+#include <limits>
 
+#include "number/Limits.h"
+using number::maxSqrt;
 #include "number/Root.h"
 using number::isqrt;
 
@@ -46,9 +47,22 @@ TEST(Root, isqrt) {
   // 2^32 - 1 is the  sqrt of 2^64 - 1
   EXPECT_EQ(4294967295ul , isqrt(18446744073709551615ul));
 
-  // Near 2^128
-  // EXPECT_EQ(18446744073709551616ull,
-  // isqrt(340282366920938463463374607431768211456ull));
+  // Limits of each built-in type
+  EXPECT_EQ(maxSqrt<unsigned char>(),
+            isqrt(std::numeric_limits<unsigned char>::max()));
+  EXPECT_EQ(maxSqrt<unsigned short>(),
+            isqrt(std::numeric_limits<unsigned short>::max()));
+  EXPECT_EQ(maxSqrt<unsigned>(), isqrt(std::numeric_limits<unsigned>::max()));
+  EXPECT_EQ(maxSqrt<unsigned long>(),
+            isqrt(std::numeric_limits<unsigned long>::max()));
+  EXPECT_EQ(maxSqrt<unsigned long long>(),
+            isqrt(std::numeric_limits<unsigned long long>::max()));
+
+  EXPECT_EQ(maxSqrt<char>(), isqrt(std::numeric_limits<char>::max()));
+  EXPECT_EQ(maxSqrt<short>(), isqrt(std::numeric_limits<short>::max()));
+  EXPECT_EQ(maxSqrt<int>(), isqrt(std::numeric_limits<int>::max()));
+  EXPECT_EQ(maxSqrt<long>(), isqrt(std::numeric_limits<long>::max()));
+  EXPECT_EQ(maxSqrt<long long>(), isqrt(std::numeric_limits<long long>::max()));
 
   mpz_class test("12345678901234567890123456789012345678901234567890");
   mpz_class testsq = test * test;
