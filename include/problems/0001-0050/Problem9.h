@@ -26,7 +26,19 @@ public:
   std::string description() const;
   void solve();
 
+  /// Solve using brute force
+  unsigned bruteForce(const unsigned sum);
+
+  /// Solve using analytic improvements
+  unsigned faster(const unsigned sum);
+
 private:
+  /// Cached answer
+  unsigned a;
+  /// Cached answer
+  unsigned b;
+  /// Cached answer
+  unsigned c;
   /// Cached answer
   unsigned product;
   /// If cached answer is valid

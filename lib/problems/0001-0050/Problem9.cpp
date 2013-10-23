@@ -67,36 +67,20 @@
 /// 2|s \qquad d|\frac{s}{2} \qquad m | \frac{s}{2d}
 /// \f]
 ///
-/// Note: 1000 = 2^3 * 5^3 and 500 = 2^2 * 5^3
+/// So to solve we will go through possible values of d, then m and n. We can
+/// stop as soon as we find the first d that works, relying on the problem to
+/// be correct that the triple is unique. At that point we can calculate the
+/// product as
 ///
-/// Therefore we need to consider the problem where the corresponding primitive
-/// Pythagorean triplet sums to a divisor of 1000.
-///
-/// Therefore we need \f$2m(m + n) | 1000\f$ or \f$m(m + n) | 500\f$.
-/// or \f$dm(m + n) = 500\f$. Let \f$d=2^u5^v\f$, \f$m=2^w5^x\f$ and
-/// \f$m + n = 2^y5^z\f$ where u,v,w,x,y,z >= 0 and u+w+y = 2 and v+x+z = 3.
-///
-/// Solving for n
 /// \f{eqnarray*}{
-/// m + n &=& 2^y5^z\\
-/// n &=& 2^y5^z - m\\
-/// n &=& 2^y5^z - 2^w5^x\\
-/// n &=& 2^w5^x(2^{y-w}5^{z-x} - 1)
+/// abcd^3 &=& (m^2 - n^2)(2mn)(m^2 + n^2)d^3\\
+/// &=& (2m^3n - 2mn^3)(m^2 + n^2)d^3\\
+/// &=& (2m^5n + 2m^3n^3 - 2m^3n^3 - 2mn^5)d^3\\
+/// &=& (2m^5n - 2mn^5)d^3\\
+/// &=& 2mnd^3(m^4 - n^4)
 /// \f}
-/// With y >= w, z >= x and at least one of those inequalities is strict, which
-/// follows because n is positive.
+/// or just work backwards to a, b, and c, and multiply them together.
 ///
-/// Therefore we are looking for u,v,w,x >= 0, y >= w, z >= x subject to
-/// u+w+y = 2, v+x+z = 3.
-///
-/// and
-/// \f{eqnarray*}{
-/// abc &=& (m^2 - n^2)(2mn)(m^2 + n^2)\\
-/// &=& (2m^3n - 2mn^3)(m^2 + n^2)\\
-/// &=& 2m^5n + 2m^3n^3 - 2m^3n^3 - 2mn^5\\
-/// &=& 2m^5n - 2mn^5\\
-/// &=& 2mn(m^4 - n^4)
-/// \f}
 //===----------------------------------------------------------------------===//
 #include "Problem9.h"
 
@@ -112,13 +96,15 @@ using std::cout;
 using std::endl;
 #include <cmath>
 
+#include "number/Divisor.h"
+
 string problems::Problem9::answer() {
   if (!solved)
     solve();
 
   stringstream ss;
 
-  ss << "The product is " << product;
+  ss << "The product is " << product << " from the triple (" << a << ", " << b << ", " << c << ")";
 
   return ss.str();
 }
@@ -128,28 +114,55 @@ std::string problems::Problem9::description() const {
 }
 
 void problems::Problem9::solve() {
-  product = 0;
+  product = bruteForce(1000);
+  solved = true;
+}
 
-  for (int u = 0; u <= 2; ++u) {
-    for (int w = 0; u + w <= 2; ++w) {
-      int y = 2 - u - w;
-      if (y < w)
-	continue;
-      for (int v = 0; v <= 3; ++v) {
-	for (int x = 0; v + x <= 3; ++x) {
-	  int z = 3 - v - x;
-	  if (z < x)
-	    continue;
-	  if (y == w && z == x)
-	    continue;
-	  cout << "Here with u = " << u << " v = " << v << " w = " << w << " x = " << x << " y = " << y << " z = " << z << "\n";
-	  auto m = pow(2.0, w) * pow(5.0, x);
-	  auto n = pow(2.0, y) * pow(5.0, z) - m;
-	  cout << "m = " << m << " n = " << n << endl;
-	}
+unsigned problems::Problem9::bruteForce(const unsigned sum) {
+  // WLOG, assume a < b
+  for (unsigned i = 1; i < sum; ++i) {
+    const auto isq = i * i;
+    for (unsigned j = i + 1; i + j < sum; ++j) {
+      const auto k = sum - i - j;
+
+      if (isq + j * j == k * k) {
+	a = i;
+	b = j;
+	c = k;
+	return i * j * k;
       }
     }
   }
-
-  solved = true;
+  return 0;
 }
+
+unsigned problems::Problem9::faster(const unsigned sum) {
+  const auto sdiv2 = sum / 2;
+  const auto divisors = number::divisors(sdiv2);
+
+  for (auto d = divisors.begin(), de = --divisors.end(); d != de; ++d) {
+    const auto sdiv2d = sdiv2 / *d;
+    for (auto m = ++divisors.begin(); *m * *m < sdiv2d; ++m) {
+      if (sdiv2d % *m != 0)
+	continue;
+
+      const auto n = sdiv2d / *m - *m;
+
+      if (n <= 0 || n >= *m)
+	continue;
+
+      const auto msq = *m * *m;
+      const auto nsq = n * n;
+      const auto mn = *m * n;
+
+      a = msq - nsq;
+      b = 2 * mn;
+      c = msq + nsq;
+
+      return a * b * c * *d * *d * *d;
+    }
+  }
+
+  return 0;
+}
+
