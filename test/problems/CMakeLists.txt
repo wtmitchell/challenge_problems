@@ -13,6 +13,7 @@ set(problemSources
   0001-0050/Problem8.cpp
   0001-0050/Problem9.cpp
   0001-0050/Problem10.cpp
+  0001-0050/Problem11.cpp
   )
 
 add_unittest(problemsTests
