@@ -31,5 +31,6 @@ TEST(Problem9, ViaFactory) {
 
   p->solve();
 
-  EXPECT_EQ("The product is 31875000 from the triple (200, 375, 425)", p->answer());
+  EXPECT_EQ("The product is 31875000 from the triple (200, 375, 425)",
+            p->answer());
 }

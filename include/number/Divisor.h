@@ -32,7 +32,7 @@ template <class T> std::vector<T> number::divisors(const T n) {
   std::vector<T> big_divisors;
 
   // Find the divisors
-  for(auto i = static_cast<T>(1); i * i <= n; ++i) {
+  for (auto i = static_cast<T>(1); i * i <= n; ++i) {
     if (n % i == 0) {
       // Divisors come in pairs
       divisors.push_back(i);
@@ -52,7 +52,7 @@ template <class T> std::vector<T> number::divisorsUnsorted(const T n) {
   std::vector<T> divisors;
 
   // Find the divisors
-  for(auto i = static_cast<T>(1); i * i <= n; ++i) {
+  for (auto i = static_cast<T>(1); i * i <= n; ++i) {
     if (n % i == 0) {
       // Divisors come in pairs
       divisors.push_back(i);
@@ -62,6 +62,5 @@ template <class T> std::vector<T> number::divisorsUnsorted(const T n) {
 
   return divisors;
 }
-
 
 #endif

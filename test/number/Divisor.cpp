@@ -20,7 +20,6 @@ TEST(Divisor, divisor) {
   expected.push_back(18);
 
   EXPECT_EQ(expected, divisors(18u));
-
 }
 
 TEST(Divisor, divisorUnsorted) {
@@ -41,5 +40,4 @@ TEST(Divisor, divisorUnsorted) {
   expected.push_back(6);
 
   EXPECT_EQ(expected, divisorsUnsorted(18u));
-
 }

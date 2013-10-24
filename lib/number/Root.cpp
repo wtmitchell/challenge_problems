@@ -11,7 +11,6 @@
 
 #include <gmpxx.h>
 
-
 // Specialization for GMP Integers
 namespace number {
 template <> mpz_class isqrt<mpz_class>(const mpz_class n) {

@@ -13,7 +13,6 @@ TEST(Problem10, Basics) {
   EXPECT_EQ(1060, p.sieveOfEratosthenes(100));
   EXPECT_EQ(76127, p.sieveOfEratosthenes(1000));
   EXPECT_EQ(5736396, p.sieveOfEratosthenes(10000));
-
 }
 
 TEST(Problem10, ViaFactory) {
@@ -21,5 +20,6 @@ TEST(Problem10, ViaFactory) {
 
   p->solve();
 
-  EXPECT_EQ("The sum of all primes below 2 million is 142913828922", p->answer());
+  EXPECT_EQ("The sum of all primes below 2 million is 142913828922",
+            p->answer());
 }

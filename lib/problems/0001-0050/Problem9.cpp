@@ -104,7 +104,8 @@ string problems::Problem9::answer() {
 
   stringstream ss;
 
-  ss << "The product is " << product << " from the triple (" << a << ", " << b << ", " << c << ")";
+  ss << "The product is " << product << " from the triple (" << a << ", " << b
+     << ", " << c << ")";
 
   return ss.str();
 }
@@ -122,17 +123,17 @@ unsigned problems::Problem9::bruteForce(const unsigned sum) {
   // WLOG, assume a < b
   // By the triangle inequality we know that i is at most sum/3
   // and must start at at least 3 since the smallest triple is (3,4,5)
-  for (unsigned i = 3; i < sum/3; ++i) {
+  for (unsigned i = 3; i < sum / 3; ++i) {
     const auto isq = i * i;
     // j can't be more than half of the remaining sum
     for (unsigned j = i + 1, e = (sum - i) / 2; j <= e; ++j) {
       const auto k = sum - i - j;
 
       if (isq + j * j == k * k) {
-	a = i;
-	b = j;
-	c = k;
-	return i * j * k;
+        a = i;
+        b = j;
+        c = k;
+        return i * j * k;
       }
     }
   }
@@ -147,12 +148,12 @@ unsigned problems::Problem9::faster(const unsigned sum) {
     const auto sdiv2d = sdiv2 / *d;
     for (auto m = ++divisors.begin(); *m * *m < sdiv2d; ++m) {
       if (sdiv2d % *m != 0)
-	continue;
+        continue;
 
       const auto n = sdiv2d / *m - *m;
 
       if (n <= 0 || n >= *m)
-	continue;
+        continue;
 
       const auto msq = *m * *m;
       const auto nsq = n * n;
@@ -168,4 +169,3 @@ unsigned problems::Problem9::faster(const unsigned sum) {
 
   return 0;
 }
-

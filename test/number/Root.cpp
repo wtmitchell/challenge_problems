@@ -45,7 +45,7 @@ TEST(Root, isqrt) {
   EXPECT_EQ(4294967295ul, isqrt(18446744065119617026ul));
 
   // 2^32 - 1 is the  sqrt of 2^64 - 1
-  EXPECT_EQ(4294967295ul , isqrt(18446744073709551615ul));
+  EXPECT_EQ(4294967295ul, isqrt(18446744073709551615ul));
 
   // Limits of each built-in type
   EXPECT_EQ(maxSqrt<unsigned char>(),
