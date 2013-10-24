@@ -11,14 +11,14 @@ def get_list_of_problems(source_dir):
     problems = []
 
     dir_re = re.compile("\d{4}-\d{4}")
-    header_re = re.compile("Problem(\d)+\.h$")
+    header_re = re.compile("Problem(\d+)\.h$")
 
     for dirpath, dirs, files in os.walk(source_dir):
         if re.match(dir_re, os.path.split(dirpath)[-1]):
             for f in files:
                 match = re.match(header_re, f)
                 if match:
-                    problems.append((match.group(1), dirpath + os.sep + f))
+                    problems.append((int(match.group(1)), dirpath + os.sep + f))
 
     return problems
 
