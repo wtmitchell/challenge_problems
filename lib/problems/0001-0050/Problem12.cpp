@@ -83,11 +83,16 @@ void problems::Problem12::solve() {
 unsigned long long
 problems::Problem12::bruteForce(const unsigned long long limit) const {
   for (auto i = 1ull, j = 1ull;; i += ++j) {
-    const auto divisors = number::divisors(i);
+    const auto divisors = number::divisorList(i);
 
     if (divisors.size() >= limit) {
       n = j;
       return i;
     }
   }
+}
+
+unsigned long long
+problems::Problem12::faster(const unsigned long long limit) const {
+  return 0;
 }

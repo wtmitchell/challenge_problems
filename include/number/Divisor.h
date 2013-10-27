@@ -18,14 +18,14 @@
 namespace number {
 /// Returns a vector of the divisors of the argument. Returned vector will be
 /// sorted in increasing order.
-template <class T> std::vector<T> divisors(const T n);
+template <class T> std::vector<T> divisorList(const T n);
 
 /// Returns a vector of the divisors of the argument. Returned vector will not
 /// be sorted
-template <class T> std::vector<T> divisorsUnsorted(const T n);
+template <class T> std::vector<T> divisorListUnsorted(const T n);
 }
 
-template <class T> std::vector<T> number::divisors(const T n) {
+template <class T> std::vector<T> number::divisorList(const T n) {
   // Initially will contain divisors at most the sqrt
   std::vector<T> divisors;
   // Will contain divisors greater than the sqrt
@@ -48,7 +48,7 @@ template <class T> std::vector<T> number::divisors(const T n) {
   return divisors;
 }
 
-template <class T> std::vector<T> number::divisorsUnsorted(const T n) {
+template <class T> std::vector<T> number::divisorListUnsorted(const T n) {
   std::vector<T> divisors;
 
   // Find the divisors

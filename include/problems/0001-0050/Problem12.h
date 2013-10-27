@@ -26,8 +26,10 @@ public:
   std::string description() const;
   void solve();
 
-  /// Simple solution based on the Sieve of Eratosthenes
+  /// Simple brute force solution
   unsigned long long bruteForce(const unsigned long long limit) const;
+  /// Faster solution
+  unsigned long long faster(const unsigned long long limit) const;
 
 private:
   /// Cached answer

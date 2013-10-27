@@ -142,7 +142,7 @@ unsigned problems::Problem9::bruteForce(const unsigned sum) {
 
 unsigned problems::Problem9::faster(const unsigned sum) {
   const auto sdiv2 = sum / 2;
-  const auto divisors = number::divisors(sdiv2);
+  const auto divisors = number::divisorList(sdiv2);
 
   for (auto d = divisors.begin(), de = --divisors.end(); d != de; ++d) {
     const auto sdiv2d = sdiv2 / *d;
