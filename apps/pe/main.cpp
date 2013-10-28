@@ -56,17 +56,20 @@ int main(int argc, char **argv) {
 void all_problems() {
   auto list = problems::Factory::list();
 
-  Timer t;
+  Timer total, individual;
 
-  t.start();
+  total.start();
   for (const auto n : list) {
     auto p = problems::Factory::create(n);
+    individual.start();
     p->solve();
-    cout << p->description() << "\n" << p->answer() << "\n";
+    individual.stop();
+    cout << p->description() << "\n" << p->answer() << "\n"
+	 << "Time elapsed: " << individual << "\n";
   }
-  t.stop();
+  total.stop();
 
-  cout << "Total time elapsed: " << t << endl;
+  cout << "Total time elapsed: " << total << endl;
 }
 
 void one_problem(const unsigned long problem) {
