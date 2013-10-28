@@ -241,6 +241,12 @@ TEST(Prime, primeDivisors) {
   EXPECT_EQ(knownFactors, primeDivisors(2ull * 5ull * 11ull * 101ull));
   EXPECT_EQ(knownFactors, primeDivisors(4ull * 5ull * 121ull * 101ull));
   EXPECT_EQ(knownFactors, primeDivisors(4ull * 25ull * 121ull * 101ull));
+
+  knownFactors.clear();
+  knownFactors.push_back(4051);
+  EXPECT_EQ(knownFactors, primeDivisors(4051ull));
+  EXPECT_EQ(knownFactors, primeDivisors(4051ull * 4051ull));
+  EXPECT_EQ(knownFactors, primeDivisors(4051ull * 4051ull * 4051ull));
 }
 
 TEST(Prime, primeDivisorsAugmented) {
