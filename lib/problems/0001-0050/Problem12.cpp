@@ -76,7 +76,7 @@ std::string problems::Problem12::description() const {
 }
 
 void problems::Problem12::solve() {
-  value = faster(500ull);
+  value = faster2(500ull);
   solved = true;
 }
 
@@ -99,6 +99,26 @@ problems::Problem12::faster(const unsigned long long limit) const {
       even = number::divisors(i / 2);
     else
       odd = number::divisors(i);
+  }
+
+  n = i - 2; // one for i being +1 and one for the extra from the loop
+  return n * (n + 1) / 2;
+}
+
+unsigned long long
+problems::Problem12::faster2(const unsigned long long limit) const {
+  auto i = 2ull; // corresponds to n+1 to avoid extra +1 all over
+
+  // Partly unrolls the loop versus version above to avoid a parity check/branch
+  for (auto even = 1ull, odd = 1ull; even * odd < limit;) {
+    even = number::divisors(i / 2);
+    ++i;
+
+    if (even * odd >= limit)
+      break;
+
+    odd = number::divisors(i);
+    ++i;
   }
   n = i - 2; // one for i being +1 and one for the extra from the loop
   return n * (n + 1) / 2;

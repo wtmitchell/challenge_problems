@@ -30,6 +30,8 @@ public:
   unsigned long long bruteForce(const unsigned long long limit) const;
   /// Faster solution
   unsigned long long faster(const unsigned long long limit) const;
+  /// Faster solution
+  unsigned long long faster2(const unsigned long long limit) const;
 
 private:
   /// Cached answer
