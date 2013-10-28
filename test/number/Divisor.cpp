@@ -4,8 +4,20 @@
 using std::vector;
 
 #include "number/Divisor.h"
+using number::divisors;
 using number::divisorList;
 using number::divisorListUnsorted;
+
+TEST(Divisor, divisors) {
+  EXPECT_EQ(4, divisors(6u));
+  EXPECT_EQ(4, divisors(10u));
+  EXPECT_EQ(5, divisors(16u));
+  EXPECT_EQ(6, divisors(20u));
+  EXPECT_EQ(8, divisors(30u));
+  EXPECT_EQ(7, divisors(64u));
+  EXPECT_EQ(12, divisors(72u));
+  EXPECT_EQ(12, divisors(96u));
+}
 
 TEST(Divisor, divisorList) {
   vector<unsigned> expected;

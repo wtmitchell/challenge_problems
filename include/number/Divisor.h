@@ -16,6 +16,9 @@
 #include <vector>
 
 namespace number {
+/// Returns the number of divisors of the argument
+template <typename T> T divisors(const T n);
+
 /// Returns a vector of the divisors of the argument. Returned vector will be
 /// sorted in increasing order.
 template <class T> std::vector<T> divisorList(const T n);
@@ -23,6 +26,23 @@ template <class T> std::vector<T> divisorList(const T n);
 /// Returns a vector of the divisors of the argument. Returned vector will not
 /// be sorted
 template <class T> std::vector<T> divisorListUnsorted(const T n);
+}
+
+template <typename T> T number::divisors(const T n) {
+  T count = static_cast<T>(0);
+  // Find the divisors
+  auto i = static_cast<T>(1);
+  for (; i * i < n; ++i) {
+    if (n % i == 0) {
+      // Divisors come in pairs
+      count += 2;
+    }
+  }
+  // To account for being a square
+  if (i * i == n)
+    ++count;
+
+  return count;
 }
 
 template <class T> std::vector<T> number::divisorList(const T n) {
