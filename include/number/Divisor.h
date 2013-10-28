@@ -28,22 +28,49 @@ template <class T> std::vector<T> divisorList(const T n);
 template <class T> std::vector<T> divisorListUnsorted(const T n);
 }
 
-template <typename T> T number::divisors(const T n) {
-  T count = static_cast<T>(0);
-  // Find the divisors
-  auto i = static_cast<T>(1);
-  for (; i * i < n; ++i) {
-    if (n % i == 0) {
-      // Divisors come in pairs
-      count += 2;
-    }
+// Convenience macro used in divisors
+/// \cond Suppress Doxygen warning
+#define PROCESS_DIVISOR(i)                                                     \
+  if (n % static_cast<T>(i) == static_cast<T>(0)) {                            \
+    T multiplicity = static_cast<T>(0);                                        \
+    do {                                                                       \
+      n /= static_cast<T>(i);                                                  \
+      ++multiplicity;                                                          \
+    } while (n % static_cast<T>(i) == static_cast<T>(0));                      \
+    count *= multiplicity + 1;                                                 \
   }
-  // To account for being a square
-  if (i * i == n)
-    ++count;
+/// \endcond
+
+template <typename T> T number::divisors(const T number) {
+  // Early exit for nonsense values
+  if (number <= static_cast<T>(0))
+    return static_cast<T>(0);
+
+  T n = number;
+  T count = static_cast<T>(1);
+
+  PROCESS_DIVISOR(2);
+  PROCESS_DIVISOR(3);
+  PROCESS_DIVISOR(5);
+
+  // Primes are +/- 1 mod 6, so we can skip 4 then 2
+  for (T i = static_cast<T>(7); i * i <= n;) {
+    PROCESS_DIVISOR(i);
+    i += static_cast<T>(4);
+    PROCESS_DIVISOR(i);
+    i += static_cast<T>(2);
+  }
+
+  // The remaining part may still be prime, if so it may be present or not in a
+  // divisor. This won't affect numbers where the largest prime has multiplicity
+  // greater than one since they would be caught in the above loop.
+  if (n != static_cast<T>(1))
+    count *= 2;
 
   return count;
 }
+
+#undef PROCESS_DIVISOR
 
 template <class T> std::vector<T> number::divisorList(const T n) {
   // Initially will contain divisors at most the sqrt
