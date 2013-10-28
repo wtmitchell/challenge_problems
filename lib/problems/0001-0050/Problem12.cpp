@@ -76,16 +76,14 @@ std::string problems::Problem12::description() const {
 }
 
 void problems::Problem12::solve() {
-  value = bruteForce(500ull);
+  value = faster(500ull);
   solved = true;
 }
 
 unsigned long long
 problems::Problem12::bruteForce(const unsigned long long limit) const {
   for (auto i = 1ull, j = 1ull;; i += ++j) {
-    const auto divisors = number::divisorList(i);
-
-    if (divisors.size() >= limit) {
+    if (number::divisors(i) >= limit) {
       n = j;
       return i;
     }
@@ -94,5 +92,14 @@ problems::Problem12::bruteForce(const unsigned long long limit) const {
 
 unsigned long long
 problems::Problem12::faster(const unsigned long long limit) const {
-  return 0;
+  auto i = 2ull; // corresponds to n+1 to avoid extra +1 all over
+
+  for (auto even = 1ull, odd = 1ull; even * odd < limit; ++i) {
+    if (i % 2 == 0)
+      even = number::divisors(i / 2);
+    else
+      odd = number::divisors(i);
+  }
+  n = i - 2; // one for i being +1 and one for the extra from the loop
+  return n * (n + 1) / 2;
 }

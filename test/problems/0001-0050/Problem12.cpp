@@ -10,7 +10,9 @@ TEST(Problem12, Basics) {
   Problem12 p;
 
   EXPECT_EQ(28, p.bruteForce(5));
+  EXPECT_EQ(28, p.faster(5));
   EXPECT_EQ(76576500, p.bruteForce(500));
+  EXPECT_EQ(76576500, p.faster(500));
 
 }
 
