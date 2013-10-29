@@ -65,7 +65,7 @@ void all_problems() {
     p->solve();
     individual.stop();
     cout << p->description() << "\n" << p->answer() << "\n"
-	 << "Time elapsed: " << individual << "\n";
+         << "Time elapsed: " << individual << "\n";
   }
   total.stop();
 

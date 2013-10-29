@@ -72,7 +72,7 @@ TEST(Divisor, divisors) {
   };
 
   for (auto i = 0u; i < 15; ++i)
-    EXPECT_EQ(dofn[i], divisors(i+1)) << " i = " << i;
+    EXPECT_EQ(dofn[i], divisors(i + 1)) << " i = " << i;
 
   EXPECT_EQ(2, divisors(4051u));
   EXPECT_EQ(3, divisors(4051u * 4051u));

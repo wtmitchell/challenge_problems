@@ -61,7 +61,8 @@ void problems::Problem14::solve() {
   solved = true;
 }
 
-unsigned long long problems::Problem14::bruteForce(const unsigned long long limit) const {
+unsigned long long
+problems::Problem14::bruteForce(const unsigned long long limit) const {
   auto maxLength = 0ull;
   auto maxStart = 0ull;
 
@@ -70,9 +71,9 @@ unsigned long long problems::Problem14::bruteForce(const unsigned long long limi
     auto jLength = 1ull;
     while (j != 1) {
       if (j % 2 == 0) {
-	j /= 2;
-	jLength += 1;
-	continue;
+        j /= 2;
+        jLength += 1;
+        continue;
       }
       // We can skip over one term since next term will definitely not be 1
       j = (3 * j + 1) / 2;
@@ -108,8 +109,8 @@ unsigned long long problems::Problem14::faster(
       // Not in cache
       if (i % 2 == 0) {
         i /= 2;
-	len += 1;
-	continue;
+        len += 1;
+        continue;
       }
 
       // Skip a step since we know length must go at least 2 steps more
