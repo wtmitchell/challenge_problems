@@ -13,6 +13,7 @@
 #ifndef NUMBER_MISCELLANEOUS_H_INCLUDED
 #define NUMBER_MISCELLANEOUS_H_INCLUDED
 
+#include <cassert>
 #include <gmpxx.h>
 
 namespace number {
