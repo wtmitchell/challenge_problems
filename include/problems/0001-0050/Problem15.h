@@ -28,9 +28,6 @@ public:
   std::string description() const;
   void solve();
 
-  // Simple brute force solution
-  unsigned long long bruteForce(const unsigned long long limit) const;
-
 private:
   /// Cached answer
   mpz_class value;
