@@ -7,6 +7,7 @@ set(numberSources
   Divisor.cpp
   Figurate.cpp
   Limits.cpp
+  Miscellaneous.cpp
   Palindrome.cpp
   Prime.cpp
   Root.cpp
