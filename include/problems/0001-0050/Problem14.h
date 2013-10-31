@@ -27,9 +27,9 @@ public:
   std::string description() const;
   void solve();
 
-  // Simple brute force solution
+  /// Simple brute force solution
   unsigned long long bruteForce(const unsigned long long limit) const;
-  // Simple brute force solution with memoization
+  /// Simple brute force solution with memoization
   unsigned long long
   faster(const unsigned long long limit,
          const std::vector<unsigned long long>::size_type cacheSize) const;
