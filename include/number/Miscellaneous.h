@@ -29,6 +29,10 @@ template <typename T> T sumOfDigits(const T n, const unsigned radix = 10);
 template <typename T, bool UseSpacesAndHyphens = true,
           bool UseBritishGrammar = false>
 std::string toEnglishString(const T number);
+/// \brief Like toEnglishString, but assumes argument is at most 999 for
+/// efficiency reasons
+template <bool UseSpacesAndHyphens, bool UseBritishGrammar>
+std::string toEnglishStringUnder1000(const unsigned group);
 }
 
 // Skip Doxygen for implementation details
@@ -47,8 +51,8 @@ namespace number{
     return sum;
   }
 
-  template <bool UseSpacesAndHyphens, bool UseAnd>
-  std::string toEnglishStringSingleGroup(const unsigned group) {
+  template <bool UseSpacesAndHyphens, bool UseBritishGrammar>
+  std::string toEnglishStringUnder1000(const unsigned group) {
     // Idiomatic names through nineteen
     const std::array<std::string, 20> smallNames = {
       { "zero",    "one",     "two",       "three",    "four",
@@ -76,9 +80,9 @@ namespace number{
 	result += "hundred";
     }
     // Insert "and" if needed
-    if (UseAnd && hundred != 0 && remainder != 0) {
+    if (UseBritishGrammar && hundred != 0 && remainder != 0) {
       if (UseSpacesAndHyphens)
-	result += " and ";
+	result += "and ";
       else
 	result += "and";
     }
@@ -121,7 +125,7 @@ namespace number{
     };
 
     // Verify we have enough group names
-    if (groups.size() > 12)
+    if (groups.size() > groupNames.size())
       return "Error: Number too big. Exceeds 10^36 - 1.";
 
     std::string result = "";
@@ -132,7 +136,7 @@ namespace number{
       if (groups[i] == 0)
 	continue;
 
-      result += toEnglishStringSingleGroup<UseSpacesAndHyphens, false>(groups[i]);
+      result += toEnglishStringUnder1000<UseSpacesAndHyphens, false>(groups[i]);
       if (UseSpacesAndHyphens)
 	result += " " + groupNames[i] + " ";
       else
@@ -143,15 +147,15 @@ namespace number{
 	if (groups[0] < 100 && result != "") {
 	  // Need to force "and" here
 	  if (UseSpacesAndHyphens)
-	    result += " and ";
+	    result += "and ";
 	  else
 	    result += "and";
 	}
-	result += toEnglishStringSingleGroup<UseSpacesAndHyphens, true>(groups[0]);
+	result += toEnglishStringUnder1000<UseSpacesAndHyphens, true>(groups[0]);
       }
       else {
 	// American Grammar
-	result += toEnglishStringSingleGroup<UseSpacesAndHyphens, false>(groups[0]);
+	result += toEnglishStringUnder1000<UseSpacesAndHyphens, false>(groups[0]);
       }
     }
 
