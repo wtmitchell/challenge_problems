@@ -34,21 +34,6 @@ std::string toEnglishString(const T number);
 // Skip Doxygen for implementation details
 /// \cond Suppress Doxygen warning
 namespace number{
-  /*
-  template <>
-  mpz_class sumOfDigits(const mpz_class number, const unsigned radix) {
-    assert(radix <= 10);
-    assert(number >= 0);
-    auto digits = number.get_str(static_cast<int>(radix));
-
-    mpz_class sum(0);
-    for (const auto i : digits)
-      sum += i - '0';
-
-    return sum;
-  }
-  */
-
   template <typename T> T sumOfDigits(const T number, const unsigned radix) {
     T sum = static_cast<T>(0);
     T n = number;
