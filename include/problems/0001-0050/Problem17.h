@@ -28,6 +28,10 @@ public:
 
   /// Simple brute force solution
   unsigned long bruteForce(const unsigned long limit) const;
+  /// Simple brute force solution with optimization for 1000
+  unsigned long bruteForce2() const;
+  /// Simple brute force solution with more optimization for 1000
+  unsigned long bruteForce3() const;
 
 private:
   /// Cached answer

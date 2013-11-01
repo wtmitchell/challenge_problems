@@ -31,7 +31,7 @@ template <typename T, bool UseSpacesAndHyphens = true,
 std::string toEnglishString(const T number);
 /// \brief Like toEnglishString, but assumes argument is at most 999 for
 /// efficiency reasons
-template <bool UseSpacesAndHyphens, bool UseBritishGrammar>
+template <bool UseSpacesAndHyphens = true, bool UseBritishGrammar = false>
 std::string toEnglishStringUnder1000(const unsigned group);
 }
 
