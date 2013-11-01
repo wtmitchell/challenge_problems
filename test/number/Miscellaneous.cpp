@@ -216,4 +216,12 @@ TEST(Miscellaneous, toEnglishString) {
   EXPECT_EQ("onehundredone", (toEnglishString<int, false>(101)));
   EXPECT_EQ("onehundredandone", (toEnglishString<int, false, true>(101)));
 
+  EXPECT_EQ("one hundred twenty-three thousand four hundred fifty-six",
+            toEnglishString(123456));
+  EXPECT_EQ("one hundred twenty-three thousand four hundred and fifty-six",
+            (toEnglishString<int, true, true>(123456)));
+  EXPECT_EQ("onehundredtwentythreethousandfourhundredfiftysix",
+            (toEnglishString<int, false>(123456)));
+  EXPECT_EQ("onehundredtwentythreethousandfourhundredandfiftysix",
+            (toEnglishString<int, false, true>(123456)));
 }
