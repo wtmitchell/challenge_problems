@@ -179,7 +179,7 @@ std::vector<T> number::primeDivisors(const T number,
 
 // Uses the Sieve of Eratosthenes
 template <class T> std::vector<T> number::primesAtMost(const T bound) {
-  // sieve holds a list of the odd integers starting at 3 eventually a true
+  // sieve holds a list of the odd integers starting at 3. Eventually a true
   // represent the number corresponding to that index is prime
   std::vector<bool> sieve((bound - 1) / 2);
   sieve.flip(); // Set all bits to true
@@ -189,21 +189,48 @@ template <class T> std::vector<T> number::primesAtMost(const T bound) {
   // less than the square root
   // Since we are only storing odds, index i corresponds to number 2*i + 3
   // and (2*i + 3)*(2*i + 3) = 4*i*(i + 3) + 9 represents the square root check
-  for (std::vector<bool>::size_type i = 0;
-       static_cast<T>(4 * i * (i + 3) + 9) < bound;) {
-    // Find the corresponding prime
-    const auto p = 2 * i + 3;
-
+  for (std::vector<bool>::size_type i = 0, p = 2 * i + 3, pSquared = p * p;
+       static_cast<T>(pSquared) < bound; p = 2 * i + 3, pSquared = p * p) {
     // Sift out the multiples of p
     // Advancing by p each time is equivalent to adding 2p, which leads to the
     // next odd multiple
-    for (auto j = i + p, e = sieve.size(); j < e; j += p)
+    // Start at the index of p*p since any composite less than p*p which has p
+    // as a factor also has a smaller prime as a factor and it would be sieved
+    // by that prime.
+    for (auto j = (pSquared - 3) / 2, e = sieve.size(); j < e; j += p)
       sieve[j] = false;
 
     // Find the next prime
     while (!sieve[++i])
       ;
   }
+
+
+  // Implementation inspired by "From Mathematics to Generic Programming"
+  // by Stepanov and Rose, pp 23-28
+  //
+  // Empirically this seems to be a little slower than the above.
+  // My conjecture why is that despite the above calculating p explicitly
+  // each time, it is only done for primes. Whereas this implementation
+  // calculates p incrementally, it is done for all odd integers, not
+  // just primes.
+  //
+  /*
+  // Need to only check to square root of bound
+  for (std::vector<bool>::size_type i = 0, iSquared = 3, p = 3;
+       iSquared < bound;) {
+    if (sieve[i]) {
+      // Index i corresponds to the prime p, sift out multiples of it
+      // starting at its square
+      for (auto j = iSquared, e = sieve.size(); j < e; j += p)
+	sieve[j] = false;
+    }
+    ++i;
+    iSquared += p;
+    p += 2;
+    iSquared += p;
+  }
+  */
 
   // Convert sieve into integers
   std::vector<T> primes;
