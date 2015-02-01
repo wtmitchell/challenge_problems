@@ -20,6 +20,10 @@ else()
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
+    if (CMAKE_GENERATOR STREQUAL "Ninja")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcolor-diagnostics")
+    endif (CMAKE_GENERATOR STREQUAL "Ninja")
+    
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
   else()
