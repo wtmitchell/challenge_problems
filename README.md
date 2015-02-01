@@ -1,13 +1,12 @@
-Project Euler
-=============
-
-These are my solutions to problems found on ProjectEuler.net.
+Challenge Problems
+==================
+These are my solutions to problems from various programming challenge problem sites. At the moment it only includes problems from [Project Euler](ProjectEuler.net). In the future I plan to add the [Matasano Crypto Challenges](http://cryptopals.com/).
 
 Feel free to look around, but if you just blindly use these answers, you're a bad person.
 
 Dependencies
 ------------
-* A recent C++ compiler
+* A recent C++ compiler. I use these problems to experiment with the new standards.
 * CMake
 * [GMP](http://gmplib.org)
 * Python3
@@ -15,7 +14,7 @@ Dependencies
 
 Build
 -----
-Should be straight forward if the dependencies are installed.
+Should be straight forward if the dependencies are installed. Depending on what you want it can be as simple as:
 
     cmake path/to/src
     make -j 7
@@ -26,7 +25,7 @@ Executables created
 The *Tests executables are unit tests corresponding to each library inside the
 lib directory.
 
-pe runs either all problems or the problem number specified as the first argument.
+pe runs Project Euler solutions. Without argument it runs all problems, but if a number is specified as the first argument it will solve only that problem.
 
 Other build targets
 -------------------
