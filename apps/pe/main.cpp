@@ -6,7 +6,7 @@ using std::endl;
 #include <string>
 using std::stoul;
 
-#include "problems/Factory.h"
+#include "project_euler/Factory.h"
 #include "util/Timer.h"
 using util::Timer;
 
@@ -54,13 +54,13 @@ int main(int argc, char **argv) {
 }
 
 void all_problems() {
-  auto list = problems::Factory::list();
+  auto list = project_euler::Factory::list();
 
   Timer total, individual;
 
   total.start();
   for (const auto n : list) {
-    auto p = problems::Factory::create(n);
+    auto p = project_euler::Factory::create(n);
     individual.start();
     p->solve();
     individual.stop();
@@ -73,7 +73,7 @@ void all_problems() {
 }
 
 void one_problem(const unsigned long problem) {
-  auto p = problems::Factory::create(problem);
+  auto p = project_euler::Factory::create(problem);
 
   Timer t;
 
