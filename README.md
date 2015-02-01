@@ -22,13 +22,12 @@ Should be straight forward if the dependencies are installed. Depending on what 
 
 Executables created
 -------------------
-The *Tests executables are unit tests corresponding to each library inside the
-lib directory.
+The *Tests executables are unit tests corresponding to each library inside the lib directory.
 
-pe runs Project Euler solutions. Without argument it runs all problems, but if a number is specified as the first argument it will solve only that problem.
+`pe` runs Project Euler solutions. Without argument it runs all problems, but if a number is specified as the first argument it will solve only that problem.
 
 Other build targets
 -------------------
 In addition to the default all target and test target, there are the following:
-* docs - Runs Doxygen
-* check-format - Runs clang-format over the source tree reporting differences
+* `docs` - Runs Doxygen
+* `check-format` - Runs clang-format over the source tree reporting differences
