@@ -16,9 +16,17 @@ Build
 -----
 Should be straight forward if the dependencies are installed. Depending on what you want it can be as simple as:
 
-    cmake path/to/src
-    make -j 7
-    make test
+```
+cmake path/to/src
+make -j 7
+make test
+```
+
+If you want clang + ninja, that first line could then be
+
+```
+CPP=clang++ CC=clang cmake -GNinja path/to/src
+```
 
 Executables created
 -------------------
