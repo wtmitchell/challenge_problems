@@ -14,7 +14,7 @@ if ! which clang-format; then
 fi
 
 DIFFERENCE=0
-FLAGS=-style=LLVM
+FLAGS=-style=file
 
 for ARG in "$@"
 do
