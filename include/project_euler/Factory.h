@@ -1,4 +1,5 @@
-//===-- project_euler/Factory.h ----------------------------------*- C++ -*-===//
+//===-- project_euler/Factory.h ----------------------------------*- C++
+//-*-===//
 //
 // Challenge Problem solutions by Will Mitchell
 //

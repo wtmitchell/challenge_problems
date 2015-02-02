@@ -45,7 +45,8 @@ void project_euler::Problem3::solve() {
   solved = true;
 }
 
-unsigned long long project_euler::Problem3::faster(const unsigned long long number) {
+unsigned long long
+project_euler::Problem3::faster(const unsigned long long number) {
   auto divisors = number::primeDivisors(number);
 
   return *divisors.rbegin();

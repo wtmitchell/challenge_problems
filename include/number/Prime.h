@@ -205,7 +205,6 @@ template <class T> std::vector<T> number::primesAtMost(const T bound) {
       ;
   }
 
-
   // Implementation inspired by "From Mathematics to Generic Programming"
   // by Stepanov and Rose, pp 23-28
   //
@@ -223,7 +222,7 @@ template <class T> std::vector<T> number::primesAtMost(const T bound) {
       // Index i corresponds to the prime p, sift out multiples of it
       // starting at its square
       for (auto j = iSquared, e = sieve.size(); j < e; j += p)
-	sieve[j] = false;
+        sieve[j] = false;
     }
     ++i;
     iSquared += p;

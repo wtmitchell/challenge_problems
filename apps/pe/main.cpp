@@ -40,24 +40,19 @@ int main(int argc, char **argv) {
       one_problem(stoul(argv[1]));
     else
       all_problems();
-  }
-  catch (std::out_of_range e) {
+  } catch (std::out_of_range e) {
     usage = true;
     cerr << "Out of Range Exception: " << e.what() << "\n";
-  }
-  catch (std::invalid_argument e) {
+  } catch (std::invalid_argument e) {
     usage = true;
     cerr << "Invalid Argument Exception: " << e.what() << "\n";
-  }
-  catch (std::logic_error e) {
+  } catch (std::logic_error e) {
     usage = true;
     cerr << "Logic Error: " << e.what() << "\n";
-  }
-  catch (std::runtime_error e) {
+  } catch (std::runtime_error e) {
     usage = true;
     cerr << "Runtime Error: " << e.what() << "\n";
-  }
-  catch (std::exception e) {
+  } catch (std::exception e) {
     usage = true;
     cerr << "Exception: " << e.what() << "\n";
   }

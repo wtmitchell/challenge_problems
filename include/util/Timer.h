@@ -57,11 +57,7 @@ public:
 
 private:
   /// Potential states of the timer
-  typedef enum {
-    Uninitialized,
-    Invalid,
-    Valid
-  } timer_status;
+  typedef enum { Uninitialized, Invalid, Valid } timer_status;
   /// Current state of the timer
   timer_status elapsed_valid;
 

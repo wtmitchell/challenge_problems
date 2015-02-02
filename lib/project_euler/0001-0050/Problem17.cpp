@@ -61,7 +61,8 @@ void project_euler::Problem17::solve() {
   solved = true;
 }
 
-unsigned long project_euler::Problem17::bruteForce(const unsigned long limit) const {
+unsigned long
+project_euler::Problem17::bruteForce(const unsigned long limit) const {
   unsigned long letters = 0;
   for (auto i = 1ul; i <= limit; ++i)
     letters += toEnglishString<unsigned long, false, true>(i).length();

@@ -50,8 +50,8 @@ void project_euler::Problem10::solve() {
   solved = true;
 }
 
-unsigned long long
-project_euler::Problem10::sieveOfEratosthenes(const unsigned long long limit) const {
+unsigned long long project_euler::Problem10::sieveOfEratosthenes(
+    const unsigned long long limit) const {
   auto primes = number::primesAtMost(limit);
   return std::accumulate(primes.begin(), primes.end(), 0ull);
 }

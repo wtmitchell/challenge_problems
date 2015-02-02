@@ -20,8 +20,8 @@ namespace util {
 // This only exists for types that are std::is_integral and std::is_unsigned
 /// Population Count of the parameter
 template <typename T>
-typename std::enable_if<std::is_integral<T>::value &&std::is_unsigned<T>::value,
-                        T>::type
+typename std::enable_if<
+    std::is_integral<T>::value && std::is_unsigned<T>::value, T>::type
 pop_count(T in) {
   // TODO, use __builtin_popcount() when available (gcc/clang)
   // or __popcnt16(), __popcnt(), __popcnt64() (MSVC)
@@ -46,8 +46,8 @@ pop_count(T in) {
 //
 // This only exists for types that are std::is_integral and std::is_unsigned
 template <typename T>
-typename std::enable_if<std::is_integral<T>::value &&std::is_unsigned<T>::value,
-                        T>::type
+typename std::enable_if<
+    std::is_integral<T>::value && std::is_unsigned<T>::value, T>::type
 snoob(T in) {
   // Can't do this with in == 0, since would trigger division by zero
   assert(in != 0);
@@ -61,8 +61,8 @@ snoob(T in) {
 
 /// Same Number of One Bits - full width of type
 template <typename T>
-typename std::enable_if<std::is_integral<T>::value &&std::is_unsigned<T>::value,
-                        T>::type
+typename std::enable_if<
+    std::is_integral<T>::value && std::is_unsigned<T>::value, T>::type
 snoob(T in, T N) {
   // Can't do this with in == 0, since would trigger division by zero
   assert(in != 0);

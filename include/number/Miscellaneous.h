@@ -55,16 +55,13 @@ template <bool UseSpacesAndHyphens, bool UseBritishGrammar>
 std::string toEnglishStringUnder1000(const unsigned group) {
   // Idiomatic names through nineteen
   const std::array<std::string, 20> smallNames = {
-    { "zero",    "one",     "two",       "three",    "four",
-      "five",    "six",     "seven",     "eight",    "nine",
-      "ten",     "eleven",  "twelve",    "thirteen", "fourteen",
-      "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" }
-  };
+      {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+       "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+       "sixteen", "seventeen", "eighteen", "nineteen"}};
   // Names for groups of ten past above idiomatic names
   const std::array<std::string, 10> smallGroupNames = {
-    { "",      "",      "twenty",  "thirty", "forty",
-      "fifty", "sixty", "seventy", "eighty", "ninety" }
-  };
+      {"", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
+       "eighty", "ninety"}};
 
   const unsigned hundred = group / 100;
   const unsigned remainder = group % 100;
@@ -118,10 +115,9 @@ std::string toEnglishStringByGroups(const std::vector<unsigned> &groups) {
   // where there is agreement between American Heritage Dictionary 4th ed and
   // Oxford English Dictionary 2nd and New editions.
   const std::array<std::string, 12> groupNames = {
-    { "",           "thousand",    "million",     "billion",
-      "trillion",   "quadrillion", "quintillion", "sextillion",
-      "septillion", "octillion",   "nonillion",   "decillion" }
-  };
+      {"", "thousand", "million", "billion", "trillion", "quadrillion",
+       "quintillion", "sextillion", "septillion", "octillion", "nonillion",
+       "decillion"}};
 
   // Verify we have enough group names
   if (groups.size() > groupNames.size())

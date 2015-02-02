@@ -31,49 +31,37 @@ template <typename T> struct maxSqrtUnsigned {
 
 template <std::size_t size> struct maxSqrtSignedImpl {
   // Hopefully zero will be wrong enough to immediately make the program fail
-  enum {
-    value = 0
-  };
+  enum { value = 0 };
 };
 
 // 8-bit
 template <> struct maxSqrtSignedImpl<1> {
   // floor(sqrt(2^7 - 1))
-  enum {
-    value = 11
-  };
+  enum { value = 11 };
 };
 
 // 16-bit
 template <> struct maxSqrtSignedImpl<2> {
   // floor(sqrt(2^15 - 1))
-  enum {
-    value = 181
-  };
+  enum { value = 181 };
 };
 
 // 32-bit
 template <> struct maxSqrtSignedImpl<4> {
   // floor(sqrt(2^32 - 1))
-  enum {
-    value = 46340
-  };
+  enum { value = 46340 };
 };
 
 // 64-bit
 template <> struct maxSqrtSignedImpl<8> {
   // floor(sqrt(2^63 - 1))
-  enum {
-    value = 3037000499
-  };
+  enum { value = 3037000499 };
 };
 
 // 128-bit
 template <> struct maxSqrtSignedImpl<16> {
   // floor(sqrt(2^127 - 1))
-  enum {
-    value = 13043817825332782212u
-  };
+  enum { value = 13043817825332782212u };
 };
 
 template <typename T> struct maxSqrtSigned {
