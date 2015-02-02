@@ -1,3 +1,16 @@
+//===-- apps/pe/main.cpp ----------------------------------------*- C++ -*-===//
+//
+// Challenge Problem solutions by Will Mitchell
+//
+// This file is distributed under the MIT License. See LICENSE for details.
+//
+//===----------------------------------------------------------------------===//
+///
+/// \file
+/// \brief A simple program to run and time Project Euler problems
+///
+//===----------------------------------------------------------------------===//
+
 #include <iostream>
 using std::cerr;
 using std::cout;
@@ -10,9 +23,13 @@ using std::stoul;
 #include "util/Timer.h"
 using util::Timer;
 
+/// Runs all problems
 void all_problems();
+
+/// Runs a single problem
 void one_problem(const unsigned long problem);
 
+/// Entry point for the program
 int main(int argc, char **argv) {
   bool usage = false;
 
