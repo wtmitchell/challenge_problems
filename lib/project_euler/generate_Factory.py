@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
 
+#===-- number/Miscellaneous.cpp ---------------------------------------------===
+#
+# Challenge Problem solutions by Will Mitchell
+#
+# This file is distributed under the MIT License. See LICENSE for details.
+#
+#===-------------------------------------------------------------------------===
+#
+# This script generates project_euler/Factory.cpp based upon the header files
+# it finds in include/project_euler/####-#### where #### are digits
+#
+#===-------------------------------------------------------------------------===
+
+
 import os
 import re
 import sys

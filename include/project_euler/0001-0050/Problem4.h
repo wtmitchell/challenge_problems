@@ -1,6 +1,6 @@
 //===-- project_euler/Problem4.h --------------------------------*- C++ -*-===//
 //
-// ProjectEuler.net solutions by Will Mitchell
+// Challenge Problem solutions by Will Mitchell
 //
 // This file is distributed under the MIT License. See LICENSE for details.
 //
