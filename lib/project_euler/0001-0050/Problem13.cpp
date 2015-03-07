@@ -117,10 +117,10 @@
 //===----------------------------------------------------------------------===//
 #include "Problem13.h"
 
-#include <algorithm>
-using std::accumulate;
 #include <array>
 using std::array;
+#include <numeric>
+using std::accumulate;
 #include <sstream>
 using std::stringstream;
 #include <string>

@@ -18,7 +18,7 @@
 //===----------------------------------------------------------------------===//
 #include "Problem10.h"
 
-#include <algorithm>
+#include <numeric>
 #include <sstream>
 using std::stringstream;
 #include <string>
