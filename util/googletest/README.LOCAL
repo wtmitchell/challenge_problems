@@ -3,7 +3,7 @@
 # Notes
 # -----
 
-# This directory contains Google Test svn R654 in a stripped down form. The procedure
+# This directory contains Google Test svn R707 in a stripped down form. The procedure
 # for stripping was taken from that of LLVM (http://llvm.org). See their
 # utils/unittest/googletest directory for more information.
 
