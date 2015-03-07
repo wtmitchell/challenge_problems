@@ -13,10 +13,10 @@ set(googletest_src
 
 # The gtest library will always get the same compiler flags
 if(CMAKE_COMPILER_IS_GNUCXX)
-  set(CMAKE_CXX_FLAGS "-O3 -Wno-variadic-macros")
+  set(CMAKE_CXX_FLAGS "${CXX_VERSION} -O3 -Wno-variadic-macros")
 else()
   if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "-O3")
+    set(CMAKE_CXX_FLAGS "${CXX_VERSION} -O3")
     if(USE_LIBCXX)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     endif()
