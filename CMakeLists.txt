@@ -9,8 +9,7 @@ set(GCC_WARNINGS "-Wall -Wextra -Wpedantic -Wunused -Wformat=2 -Wswitch-enum -Ws
 set(CLANG_WARNINGS "-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-padded")
 set(CXX_VERSION "-std=c++14")
 
-option(USE_LIBCXX "Use libc++ when using Clang" ON)
-option(USE_LIBCXXABI "Use libcxxabi (requires libc++ and Clang)" ON)
+option(USE_LIBCXX "Use libc++ when using Clang" OFF)
 
 # Set up the compiler flags used
 if(CMAKE_COMPILER_IS_GNUCXX)
@@ -34,10 +33,6 @@ else()
 
     if (USE_LIBCXX)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
-
-      if (USE_LIBCXXABI)
-	set(CMAKE_EXE_LINKER_FLAGS "-lc++abi")
-      endif()
     endif()
 
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
