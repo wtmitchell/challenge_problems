@@ -85,7 +85,7 @@ endforeach()
 add_custom_target(clang-format DEPENDS ${format_list})
 
 # clang-tidy stuff
-set(CMAKE_EXPORT_COMPILE_COMMANDS true)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB_RECURSE tidy_files apps/*.cpp lib/*.cpp test/*.cpp)
 
