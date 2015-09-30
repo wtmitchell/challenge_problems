@@ -66,7 +66,8 @@ string project_euler::Problem12::answer() {
   stringstream ss;
 
   ss << "The " << n << "th triangular number is the first triangular number "
-                       "with over 500 divisors. It is " << value;
+                       "with over 500 divisors. It is "
+     << value;
 
   return ss.str();
 }

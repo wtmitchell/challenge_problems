@@ -58,7 +58,8 @@ string project_euler::Problem6::answer() {
   stringstream ss;
 
   ss << "The difference between the sum of squares and the square of the sum "
-        "of the first 100 natural numbers is  " << difference;
+        "of the first 100 natural numbers is  "
+     << difference;
 
   return ss.str();
 }
