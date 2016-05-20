@@ -125,7 +125,7 @@ Problem11::bruteForce(const std::array<std::array<unsigned, C>, R> grid) const {
   for (std::size_t i = 3; i < R; ++i) {
     for (std::size_t j = 0; j < C - 3; ++j) {
       if (grid[i][j] * grid[i - 1][j + 1] * grid[i - 2][j + 2] *
-              grid[i - 3][j - 3] >
+              grid[i - 3][j + 3] >
           max)
         max = grid[i][j] * grid[i - 1][j + 1] * grid[i - 2][j + 2] *
               grid[i - 3][j + 3];
