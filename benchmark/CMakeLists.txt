@@ -52,7 +52,7 @@ endfunction()
 
 # google-benchmark triggers some warnings via macro includes, suppress them
 if("${CMAKE_C_COMPILER}" MATCHES "clang")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-global-constructors")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-global-constructors -Wno-missing-prototypes")
 endif()
 
 
