@@ -63,6 +63,7 @@ if (!GMP_FOUND)
 endif()
 
 add_subdirectory(apps)
+add_subdirectory(benchmark)
 add_subdirectory(lib)
 add_subdirectory(test)
 add_subdirectory(util)
