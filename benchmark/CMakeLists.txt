@@ -9,7 +9,7 @@ ExternalProject_Add(google-benchmark
   INSTALL_COMMAND "" # Disable install step
   TEST_BEFORE_INSTALL 1
   UPDATE_COMMAND "" # Don't need to update since using tagged release
-  CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release
+  CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
   BUILD_BYPRODUCTS ${CMAKE_CURRENT_BINARY_DIR}/google-benchmark/src/libbenchmark.a
   )
 
