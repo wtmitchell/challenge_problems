@@ -66,7 +66,6 @@ add_subdirectory(apps)
 add_subdirectory(benchmark)
 add_subdirectory(lib)
 add_subdirectory(test)
-add_subdirectory(util)
 
 # Documentation must be explicitly requested
 add_subdirectory(docs EXCLUDE_FROM_ALL)
