@@ -27,9 +27,9 @@ public:
   void solve();
 
   /// Brute force solution
-  unsigned int brute_force(const unsigned int limit);
+  unsigned int brute_force(const unsigned int limit) const;
   /// Faster solution
-  unsigned int faster(const unsigned int limit);
+  unsigned int evens_only(const unsigned int limit) const;
 
 private:
   /// Cached answer

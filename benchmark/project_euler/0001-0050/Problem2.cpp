@@ -11,11 +11,11 @@ void Problem2_BruteForce(benchmark::State& state) {
 }
 BENCHMARK(Problem2_BruteForce);
 
-void Problem2_Faster(benchmark::State& state) {
+void Problem2_Evens_Only(benchmark::State& state) {
   Problem2 p;
   while(state.KeepRunning()) {
-    benchmark::DoNotOptimize(p.faster(4000000));
+    benchmark::DoNotOptimize(p.evens_only(4000000));
   }
 }
-BENCHMARK(Problem2_Faster);
+BENCHMARK(Problem2_Evens_Only);
 

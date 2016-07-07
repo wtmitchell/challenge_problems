@@ -47,7 +47,9 @@
 ///   &=& 2 F_{n} + F_{n-1}
 /// \f}
 /// Now we can skip straight to the even Fibonacci numbers and don't need to
-/// check for even-ness, assuming correct starting values.
+/// check for even-ness, assuming correct starting values. In particular we
+/// use \f$F_{n}\f$ and \f$F_{n-1}\f$ to compute \f$F_{n+3}\f$ and \f$F_{n+2}\f$
+/// until we reach out limit, summing up the \f$F_{n+3}\f$ along the way.
 //===----------------------------------------------------------------------===//
 #include "Problem2.h"
 
@@ -77,12 +79,12 @@ std::string project_euler::Problem2::description() const {
 }
 
 void project_euler::Problem2::solve() {
-  sum = faster(4000000);
+  sum = evens_only(4000000);
   solved = true;
 }
 
 // Goes through Fibonacci numbers one by one and adds only if even
-unsigned int project_euler::Problem2::brute_force(const unsigned int limit) {
+unsigned int project_euler::Problem2::brute_force(const unsigned int limit) const {
   unsigned int nm2 = 1; // n - 2
   unsigned int nm1 = 1; // n - 1
   unsigned int n = 2;   // n
@@ -101,7 +103,7 @@ unsigned int project_euler::Problem2::brute_force(const unsigned int limit) {
 }
 
 // Goes through only the even Fibonacci numbers
-unsigned int project_euler::Problem2::faster(const unsigned int limit) {
+unsigned int project_euler::Problem2::evens_only(const unsigned int limit) const {
   unsigned int s = 0;
   unsigned int np3 = 2; // n + 3
   unsigned int np2 = 1; // n + 2
