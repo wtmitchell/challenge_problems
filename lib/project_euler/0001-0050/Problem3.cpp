@@ -41,12 +41,12 @@ std::string project_euler::Problem3::description() const {
 }
 
 void project_euler::Problem3::solve() {
-  factor = faster(600851475143ull);
+  factor = divisor_list(600851475143ull);
   solved = true;
 }
 
 unsigned long long
-project_euler::Problem3::faster(const unsigned long long number) {
+project_euler::Problem3::divisor_list(const unsigned long long number) const {
   auto divisors = number::primeDivisors(number);
 
   return *divisors.rbegin();

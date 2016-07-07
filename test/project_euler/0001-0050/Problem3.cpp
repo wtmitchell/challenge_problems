@@ -8,8 +8,8 @@ using project_euler::Factory::create;
 TEST(Problem3, Basics) {
   Problem3 p;
 
-  EXPECT_EQ(29, p.faster(13195));
-  EXPECT_EQ(6857, p.faster(600851475143ull));
+  EXPECT_EQ(29, p.divisor_list(13195));
+  EXPECT_EQ(6857, p.divisor_list(600851475143ull));
 }
 
 TEST(Problem3, ViaFactory) {

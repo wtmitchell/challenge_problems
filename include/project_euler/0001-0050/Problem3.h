@@ -27,7 +27,7 @@ public:
   void solve();
 
   /// Faster solution
-  unsigned long long faster(const unsigned long long limit);
+  unsigned long long divisor_list(const unsigned long long limit) const;
 
 private:
   /// Cached answer
