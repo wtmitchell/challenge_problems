@@ -10,11 +10,11 @@ TEST(Problem1, Basics) {
 
   EXPECT_EQ(23, p.brute_force(10));
   EXPECT_EQ(233168, p.brute_force(1000));
-  EXPECT_EQ(23, p.faster(10));
-  EXPECT_EQ(233168, p.faster(1000));
-  EXPECT_EQ(p.brute_force(1000), p.faster(1000));
-  EXPECT_EQ(p.brute_force(100), p.faster(100));
-  EXPECT_EQ(p.brute_force(10), p.faster(10));
+  EXPECT_EQ(23, p.analytic(10));
+  EXPECT_EQ(233168, p.analytic(1000));
+  EXPECT_EQ(p.brute_force(1000), p.analytic(1000));
+  EXPECT_EQ(p.brute_force(100), p.analytic(100));
+  EXPECT_EQ(p.brute_force(10), p.analytic(10));
 }
 
 TEST(Problem1, ViaFactory) {

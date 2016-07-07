@@ -63,11 +63,11 @@ std::string project_euler::Problem1::description() const {
 }
 
 void project_euler::Problem1::solve() {
-  sum = faster(1000);
+  sum = analytic(1000);
   solved = true;
 }
 
-int project_euler::Problem1::brute_force(const int limit) {
+int project_euler::Problem1::brute_force(const int limit) const {
   int s = 0;
   for (int i = 0; i < limit; ++i) {
     if ((i % 3 == 0) || (i % 5 == 0))
@@ -76,7 +76,7 @@ int project_euler::Problem1::brute_force(const int limit) {
   return s;
 }
 
-int project_euler::Problem1::faster(const int limit) {
+int project_euler::Problem1::analytic(const int limit) const {
   return 3 * ((limit - 1) / 3 * ((limit - 1) / 3 + 1)) / 2 +
          5 * ((limit - 1) / 5 * ((limit - 1) / 5 + 1)) / 2 -
          15 * ((limit - 1) / 15 * ((limit - 1) / 15 + 1)) / 2;

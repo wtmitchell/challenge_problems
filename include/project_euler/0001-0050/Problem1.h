@@ -27,9 +27,9 @@ public:
   void solve();
 
   /// Brute force solution
-  int brute_force(const int limit);
+  int brute_force(const int limit) const;
   /// Faster analytic solution
-  int faster(const int limit);
+  int analytic(const int limit) const;
 
 private:
   /// Cached answer
