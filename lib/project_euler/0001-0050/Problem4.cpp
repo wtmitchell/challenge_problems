@@ -44,6 +44,10 @@ std::string project_euler::Problem4::description() const {
 }
 
 void project_euler::Problem4::solve() {
+  brute_force();
+}
+
+void project_euler::Problem4::brute_force() {
   unsigned int max = 0;
 
   // Ranges are for 3-digit numbers. Extra i * i check is to ensure that getting

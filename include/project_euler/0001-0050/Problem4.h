@@ -26,6 +26,9 @@ public:
   std::string description() const;
   void solve();
 
+  /// Look through all potential numbers
+  void brute_force();
+
 private:
   /// Cached answer
   unsigned int factor1;
