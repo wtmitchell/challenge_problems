@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+# Setup various types of CMake builds
+
+# Make the script a little more friendly
+set -o errexit
+set -o pipefail
+set -o nounset
+# set -o xtrace
+
+# Parent directory for all build types
+BUILD_DIR="build"
+# Build generator to use, probably "Ninja" or "UNIX Makefiles"
+BUILD_GENERATOR="Ninja"
+
+# Simple build types (non-instrumented)
+# Compilers to test with simple configs. Note these are arrays and need to pair up
+SIMPLE_C=( gcc clang )
+SIMPLE_CXX=( g++ clang++ )
+# Types to iterate all of the simple compiler setups through
+SIMPLE_TYPES="Debug Release"
+
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+log() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@"
+}
+
+#######################################
+# Sets up a specific build configuration
+# Globals:
+#   BUILD_DIR
+#   BUILD_GENERATOR
+# Arguments:
+#   subdirectory to put build in
+#   arguments to pass to CMake (except generator)
+# Returns:
+#   None
+#######################################
+specific_build() {
+  local directory="${BUILD_DIR}/${1}"
+  local arguments="${2}"
+  if [[ ! -d "${directory}" ]]; then
+    log "Creating ${directory} build"
+    mkdir -p "${directory}"
+    cd "${directory}"
+    cmake ${arguments} -G ${BUILD_GENERATOR} "../.."
+    cd - > /dev/null
+  else
+    log "WARNING ${directory} already exists. Skipping configuration..."
+  fi
+}
+
+# Simple builds
+for idx in "${!SIMPLE_C[@]}"; do
+  compilers="-D CMAKE_C_COMPILER=${SIMPLE_C[idx]} -D CMAKE_CXX_COMPILER=${SIMPLE_CXX[idx]}"
+  for type in ${SIMPLE_TYPES}; do
+    dir="${SIMPLE_C[idx]}-${type}"
+    # Force dir to lowercase
+    dir=${dir,,}
+    arguments="${compilers} -DCMAKE_BUILD_TYPE=${type}"
+    specific_build "${dir}" "${arguments}"
+  done
+done
+
