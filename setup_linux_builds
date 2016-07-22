@@ -8,6 +8,9 @@ set -o pipefail
 set -o nounset
 # set -o xtrace
 
+#######################################
+# Settings
+#
 # Parent directory for all build types
 BUILD_DIR="build"
 # Build generator to use, probably "Ninja" or "UNIX Makefiles"
