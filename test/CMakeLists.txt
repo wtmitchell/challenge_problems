@@ -51,6 +51,11 @@ function(add_unittest test_name)
     )
 
   add_test(${test_name} ${CMAKE_BINARY_DIR}/${test_name})
+  if (USE_VALGRIND_MEMCHECK)
+    set(memcheck_command "${CTEST_MEMORYCHECK_COMMAND} ${CTEST_MEMORYCHECK_COMMAND_OPTIONS}")
+    separate_arguments(memcheck_command)
+    add_test(memcheck_${test_name} ${memcheck_command} ${CMAKE_BINARY_DIR}/${test_name})
+  endif()
 endfunction()
 
 # googletest triggers some warnings via macro includes, suppress them

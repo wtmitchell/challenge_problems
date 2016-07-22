@@ -10,6 +10,11 @@ set(CLANG_WARNINGS "-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -W
 set(CXX_VERSION "-std=c++14")
 
 option(USE_LIBCXX "Use libc++ when using Clang" OFF)
+option(USE_VALGRIND_MEMCHECK "Add copies of unit tests with Valgrind's memcheck to run unit tests" ON)
+
+# Valgrind setup
+find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
+set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full")
 
 # Set up the compiler flags used
 if(CMAKE_COMPILER_IS_GNUCXX)
