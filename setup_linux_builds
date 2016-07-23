@@ -23,6 +23,18 @@ SIMPLE_CXX=( g++ clang++ )
 # Types to iterate all of the simple compiler setups through
 SIMPLE_TYPES="Debug Release"
 
+# Sanitizers
+CLANG_SANITIZER_C=( clang )
+CLANG_SANITIZER_CXX=( clang++ )
+CLANG_SANITIZER_NAMES=( asan msan tsan ubsan )
+CLANG_SANITIZER_ARGS=( USE_SANITIZER_ADDRESS USE_SANITIZER_MEMORY USE_SANITIZER_THREAD USE_SANITIZER_UNDEFINED )
+CLANG_SANITIZER_TYPES="Debug Release"
+GCC_SANITIZER_C=( gcc )
+GCC_SANITIZER_CXX=( g++ )
+GCC_SANITIZER_NAMES=( asan lsan tsan ubsan )
+GCC_SANITIZER_ARGS=( USE_SANITIZER_ADDRESS USE_SANITIZER_LEAK USE_SANITIZER_THREAD USE_SANITIZER_UNDEFINED )
+GCC_SANITIZER_TYPES="Debug Release"
+
 err() {
   echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
 }
@@ -66,5 +78,33 @@ for idx in "${!SIMPLE_C[@]}"; do
     arguments="${compilers} -DCMAKE_BUILD_TYPE=${type}"
     specific_build "${dir}" "${arguments}"
   done
+done
+
+# Sanitizer builds (Clang)
+for idx1 in "${!CLANG_SANITIZER_C[@]}"; do
+    compilers="-D CMAKE_C_COMPILER=${CLANG_SANITIZER_C[idx1]} -D CMAKE_CXX_COMPILER=${CLANG_SANITIZER_CXX[idx1]}"
+    for type in ${CLANG_SANITIZER_TYPES}; do
+	for idx2 in "${!CLANG_SANITIZER_NAMES[@]}"; do
+	    dir="${CLANG_SANITIZER_C[idx1]}-${type}-${CLANG_SANITIZER_NAMES[idx2]}"
+	    # Force dir to lowercase
+	    dir=${dir,,}
+	    arguments="${compilers} -D${CLANG_SANITIZER_ARGS[idx2]}=True"
+	    specific_build "${dir}" "${arguments}"
+	done
+    done
+done
+
+# # Sanitizer builds (gcc)
+for idx1 in "${!GCC_SANITIZER_C[@]}"; do
+    compilers="-D CMAKE_C_COMPILER=${GCC_SANITIZER_C[idx1]} -D CMAKE_CXX_COMPILER=${GCC_SANITIZER_CXX[idx1]}"
+    for type in ${GCC_SANITIZER_TYPES}; do
+	for idx2 in "${!GCC_SANITIZER_NAMES[@]}"; do
+	    dir="${GCC_SANITIZER_C[idx1]}-${type}-${GCC_SANITIZER_NAMES[idx2]}"
+	    # Force dir to lowercase
+	    dir=${dir,,}
+	    arguments="${compilers} -D${GCC_SANITIZER_ARGS[idx2]}=True"
+	    specific_build "${dir}" "${arguments}"
+	done
+    done
 done
 

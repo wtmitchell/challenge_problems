@@ -11,10 +11,35 @@ set(CXX_VERSION "-std=c++14")
 
 option(USE_LIBCXX "Use libc++ when using Clang" OFF)
 option(USE_VALGRIND_MEMCHECK "Add copies of unit tests with Valgrind's memcheck to run unit tests" ON)
+option(USE_SANITIZER_ADDRESS "Uses AddressSanitizer" OFF)
+option(USE_SANITIZER_LEAK "Uses LeakSanitizer" OFF)
+option(USE_SANITIZER_MEMORY "Uses MemorySanitizer" OFF)
+option(USE_SANITIZER_THREAD "Uses ThreadSanitizer" OFF)
+option(USE_SANITIZER_UNDEFINED "Uses UndefinedBehaviorSanitizer" OFF)
 
 # Valgrind setup
 find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
 set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full")
+
+# Ensure at most one sanitizer is enabled
+if ((USE_SANITIZER_ADDRESS AND USE_SANITIZER_MEMORY)
+    OR (USE_SANITIZER_ADDRESS AND USE_SANITIZER_LEAK)
+    OR (USE_SANITIZER_ADDRESS AND USE_SANITIZER_THREAD)
+    OR (USE_SANITIZER_ADDRESS AND USE_SANITIZER_UNDEFINED)
+    OR (USE_SANITIZER_LEAK AND USE_SANITIZER_MEMORY)
+    OR (USE_SANITIZER_LEAK AND USE_SANITIZER_THREAD)
+    OR (USE_SANITIZER_LEAK AND USE_SANITIZER_UNDEFINED)
+    OR (USE_SANITIZER_MEMORY AND USE_SANITIZER_THREAD)
+    OR (USE_SANITIZER_MEMORY AND USE_SANITIZER_UNDEFINED)
+    OR (USE_SANITIZER_THREAD AND USE_SANITIZER_UNDEFINED))
+  message(FATAL_ERROR "Can only use one sanitizer at a time")
+endif()
+
+# If using a Sanitizer, disable Valgrind tests since they will conflict
+if (USE_SANITIZER_ADDRESS OR USE_SANITIZER_LEAK OR USE_SANITIZER_MEMORY
+    OR USE_SANITIZER_THREAD OR USE_SANITIZER_UNDEFINED)
+  set(USE_VALGRIND_MEMCHECK OFF)
+endif()
 
 # Set up the compiler flags used
 if(CMAKE_COMPILER_IS_GNUCXX)
@@ -24,6 +49,22 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   if (CMAKE_GENERATOR STREQUAL "Ninja")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color")
   endif (CMAKE_GENERATOR STREQUAL "Ninja")
+
+  if (USE_SANITIZER_ADDRESS)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+  endif ()
+
+  if (USE_SANITIZER_LEAK)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=leak")
+  endif ()
+
+  if (USE_SANITIZER_THREAD)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
+  endif ()
+
+  if (USE_SANITIZER_UNDEFINED)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
+  endif ()
 
   set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
   set(CMAKE_CXX_FLAGS_RELEASE "-O3")
@@ -39,6 +80,22 @@ else()
     if (USE_LIBCXX)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     endif()
+
+    if (USE_SANITIZER_ADDRESS)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+    endif ()
+
+    if (USE_SANITIZER_MEMORY)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory")
+    endif ()
+
+    if (USE_SANITIZER_THREAD)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
+    endif ()
+
+    if (USE_SANITIZER_UNDEFINED)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
+    endif ()
 
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
