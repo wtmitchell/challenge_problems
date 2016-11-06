@@ -4,11 +4,18 @@ project(PROJECT_EULER)
 set (PROJECT_VERSION_MAJOR 0)
 set (PROJECT_VERSION_MINOR 1)
 
-# Settings
+# Compiler Flags
 set(GCC_WARNINGS "-Wall -Wextra -Wpedantic -Wunused -Wformat=2 -Wswitch-enum -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wsuggest-attribute=noreturn -Wcast-align -Wcast-qual -Wconversion -Wsign-conversion -Wzero-as-null-pointer-constant -Wlogical-op -Wmissing-declarations -Wctor-dtor-privacy -Wnoexcept -Wnon-virtual-dtor -Wstrict-null-sentinel -Wold-style-cast -Woverloaded-virtual -Wfloat-equal -Wredundant-decls -Wshadow -Wwrite-strings -Wno-long-long")
 set(CLANG_WARNINGS "-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-padded -Wno-documentation-unknown-command")
 set(CXX_VERSION "-std=c++14")
 
+set(CLANG_DEBUG "-O0 -g")
+set(CLANG_RELEASE "-O0 -g")
+
+set(GCC_DEBUG "-O0 -g")
+set(GCC_RELEASE "-O0 -g")
+
+# Build options
 option(USE_LIBCXX "Use libc++ when using Clang" OFF)
 option(USE_VALGRIND_MEMCHECK "Add copies of unit tests with Valgrind's memcheck to run unit tests" ON)
 option(USE_SANITIZER_ADDRESS "Uses AddressSanitizer" OFF)
@@ -18,8 +25,14 @@ option(USE_SANITIZER_THREAD "Uses ThreadSanitizer" OFF)
 option(USE_SANITIZER_UNDEFINED "Uses UndefinedBehaviorSanitizer" OFF)
 
 # Valgrind setup
-find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
-set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full")
+if (USE_VALGRIND_MEMCHECK)
+  find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
+  set(CTEST_MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full")
+  if (CTEST_MEMORYCHECK_COMMAND-NOTFOUND)
+    message(WARNING "Cannot find valgrind. Disabling USE_VALGRIND_MEMCHECK")
+    set(USE_VALGRIND_MEMCHECK OFF)
+  endif()
+endif()
 
 # Ensure at most one sanitizer is enabled
 if ((USE_SANITIZER_ADDRESS AND USE_SANITIZER_MEMORY)
@@ -43,7 +56,7 @@ endif()
 
 # Set up the compiler flags used
 if(CMAKE_COMPILER_IS_GNUCXX)
-  # gcc flags
+  # gcc
   set(CMAKE_CXX_FLAGS "${CXX_VERSION} ${GCC_WARNINGS}")
 
   if (CMAKE_GENERATOR STREQUAL "Ninja")
@@ -66,11 +79,11 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
   endif ()
 
-  set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
-  set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+  set(CMAKE_CXX_FLAGS_DEBUG "${GCC_DEBUG}")
+  set(CMAKE_CXX_FLAGS_RELEASE "${GCC_RELEASE}")
 else()
   if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    # clang flags
+    # clang
     set(CMAKE_CXX_FLAGS "${CXX_VERSION} ${CLANG_WARNINGS}")
 
     if (CMAKE_GENERATOR STREQUAL "Ninja")
@@ -97,10 +110,10 @@ else()
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
     endif ()
 
-    set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CLANG_DEBUG}")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CLANG_RELEASE}")
   else()
-    # Generic flags
+    # Generic flags for undetected compiler
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
   endif()
@@ -132,6 +145,9 @@ add_subdirectory(test)
 # Documentation must be explicitly requested
 add_subdirectory(docs EXCLUDE_FROM_ALL)
 
+# Have Ninja export the compile commands for various clang tools
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # clang-format stuff
 file(GLOB_RECURSE format_files apps/*.cpp include/*.h lib/*.cpp test/*.h test/*.cpp)
 
@@ -147,7 +163,6 @@ endforeach()
 add_custom_target(clang-format DEPENDS ${format_list})
 
 # clang-tidy stuff
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 file(GLOB_RECURSE tidy_files apps/*.cpp lib/*.cpp test/*.cpp)
 
