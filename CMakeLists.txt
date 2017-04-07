@@ -23,6 +23,7 @@ option(USE_SANITIZER_LEAK "Uses LeakSanitizer" OFF)
 option(USE_SANITIZER_MEMORY "Uses MemorySanitizer" OFF)
 option(USE_SANITIZER_THREAD "Uses ThreadSanitizer" OFF)
 option(USE_SANITIZER_UNDEFINED "Uses UndefinedBehaviorSanitizer" OFF)
+option(USE_INCLUDE_WHAT_YOU_USE "Uses Include What You Use" ON)
 
 # Valgrind setup
 if (USE_VALGRIND_MEMCHECK)
@@ -52,6 +53,11 @@ endif()
 if (USE_SANITIZER_ADDRESS OR USE_SANITIZER_LEAK OR USE_SANITIZER_MEMORY
     OR USE_SANITIZER_THREAD OR USE_SANITIZER_UNDEFINED)
   set(USE_VALGRIND_MEMCHECK OFF)
+endif()
+
+# Can only use Include What You Use if using Make or Ninja
+if (USE_INCLUDE_WHAT_YOU_USE AND NOT "${CMAKE_GENERATOR}" MATCHES "Make|Ninja")
+  message(FATAL_ERROR "Can only use Include-What-You-Use with Make or Ninja")
 endif()
 
 # Set up the compiler flags used
@@ -147,6 +153,17 @@ add_subdirectory(docs EXCLUDE_FROM_ALL)
 
 # Have Ninja export the compile commands for various clang tools
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# include-what-you-use
+if(USE_INCLUDE_WHAT_YOU_USE)
+  find_program(INCLUDE_WHAT_YOU_USE include-what-you-use)
+  if(INCLUDE_WHAT_YOU_USE)
+    message(STATUS "Enable Include What You Use")
+    set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE include-what-you-use)
+  else()
+    message(WARNING "Could not find include-what-you-use")
+  endif()
+endif()
 
 # clang-format stuff
 file(GLOB_RECURSE format_files apps/*.cpp include/*.h lib/*.cpp test/*.h test/*.cpp)
