@@ -137,11 +137,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 enable_testing()
 
 # We require the GNU Multi-Precision library
-find_package(GMP)
-
-if (!GMP_FOUND)
-  message(FATAL_ERROR "GMP not found.")
-endif()
+find_package(GMP REQUIRED)
 
 add_subdirectory(apps)
 add_subdirectory(benchmark)

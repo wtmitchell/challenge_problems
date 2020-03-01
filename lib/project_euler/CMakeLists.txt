@@ -38,4 +38,4 @@ add_library(project_euler
   ${gen_files}
   )
 
-target_link_libraries(project_euler gmpxx gmp)
+target_link_libraries(project_euler GMP::GMPXX GMP::GMP)

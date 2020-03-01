@@ -1,5 +1,5 @@
 set(TEST_LINK_COMPONENTS
-  gmpxx gmp
+  GMP::GMPXX GMP::GMP
   number
   )
 
