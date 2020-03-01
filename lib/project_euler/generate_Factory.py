@@ -41,7 +41,6 @@ def print_header(out):
               "#include \"project_euler/Invalid.h\"\n" +
               "#include \"project_euler/Problem.h\"\n" +
               "using project_euler::Problem;\n" +
-              "#include \"util/Pointers.h\"\n" +
               "\n" +
               "#include <memory>\n" +
               "#include <vector>\n" +
@@ -62,11 +61,11 @@ def print_create(out, problems):
 
     for p in problems:
         out.write(indent2 + "case " + str(p[0]) + ": {\n" +
-                  indent3 + "return make_unique<Problem" + str(p[0]) + ">();\n" +
+                  indent3 + "return std::make_unique<Problem" + str(p[0]) + ">();\n" +
                   indent2 + "}\n")
 
     out.write(indent2 + "default: {\n" +
-              indent3 + "return make_unique<Invalid>();\n" +
+              indent3 + "return std::make_unique<Invalid>();\n" +
               indent2 + "}\n" +
               indent + "}\n" )
 

@@ -5,9 +5,10 @@ set (PROJECT_VERSION_MAJOR 0)
 set (PROJECT_VERSION_MINOR 1)
 
 # Compiler Flags
+set(CMAKE_CXX_STANDARD 17)
+
 set(GCC_WARNINGS "-Wall -Wextra -Wpedantic -Wunused -Wformat=2 -Wswitch-enum -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wsuggest-attribute=noreturn -Wcast-align -Wcast-qual -Wconversion -Wsign-conversion -Wzero-as-null-pointer-constant -Wlogical-op -Wmissing-declarations -Wctor-dtor-privacy -Wnoexcept -Wnon-virtual-dtor -Wstrict-null-sentinel -Wold-style-cast -Woverloaded-virtual -Wfloat-equal -Wredundant-decls -Wshadow -Wwrite-strings -Wno-long-long")
-set(CLANG_WARNINGS "-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-padded -Wno-documentation-unknown-command")
-set(CXX_VERSION "-std=c++14")
+set(CLANG_WARNINGS "-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-c++11-extensions -Wno-padded -Wno-documentation-unknown-command")
 
 set(CLANG_DEBUG "-O0 -g")
 set(CLANG_RELEASE "-O0 -g")
@@ -63,7 +64,7 @@ endif()
 # Set up the compiler flags used
 if(CMAKE_COMPILER_IS_GNUCXX)
   # gcc
-  set(CMAKE_CXX_FLAGS "${CXX_VERSION} ${GCC_WARNINGS}")
+  set(CMAKE_CXX_FLAGS "${GCC_WARNINGS}")
 
   if (CMAKE_GENERATOR STREQUAL "Ninja")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color")
@@ -90,7 +91,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 else()
   if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     # clang
-    set(CMAKE_CXX_FLAGS "${CXX_VERSION} ${CLANG_WARNINGS}")
+    set(CMAKE_CXX_FLAGS "${CLANG_WARNINGS}")
 
     if (CMAKE_GENERATOR STREQUAL "Ninja")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcolor-diagnostics")
