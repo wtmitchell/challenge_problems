@@ -1,23 +1,6 @@
-# Googletest setup
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG release-1.10.0
-)
-
-FetchContent_GetProperties(googletest)
-string(TOLOWER "googletest" lcName)
-if(NOT ${lcName}_POPULATED)
-  FetchContent_Populate(googletest)
-  add_subdirectory(${${lcName}_SOURCE_DIR} ${${lcName}_BINARY_DIR})
-endif()
-
-find_package(Threads)
-# Function to collect a libraries tests together into a distinct
-# googletest executable per library
+include(GetGoogletest)
 include(GoogleTest)
-
+find_package(Threads)
 
 function(add_unittest test_name)
   add_executable(${test_name} ${ARGN})
