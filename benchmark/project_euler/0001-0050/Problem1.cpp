@@ -1,4 +1,4 @@
-#include <benchmark/benchmark_api.h>
+#include <benchmark/benchmark.h>
 
 #include "project_euler/0001-0050/Problem1.h"
 using project_euler::Problem1;
