@@ -1,4 +1,30 @@
-# Google Benchmark setup
+# -*- cmake -*-
+
+#[=======================================================================[.rst:
+GetGoogleBenchmark
+-------
+
+Downloads and configures Google Benchmark library using the FetchContent CMake module
+
+Imported Targets
+^^^^^^^^^^^^^^^^
+
+This module provides the following imported targets, if found:
+
+``benchmark::benchmark``
+  The Benchmark library
+``benchmark::benchmark_main``
+  The main entry point for running benchmarks
+
+Result Variables
+^^^^^^^^^^^^^^^^
+
+This will define the following variables:
+
+``benchmark_POPULATED``
+  True if Googletest has been downloaded and configured
+
+#]=======================================================================]
 
 include(GetGoogletest)
 

@@ -1,4 +1,32 @@
-# Googletest setup
+# -*- cmake -*-
+
+#[=======================================================================[.rst:
+GetGoogletest
+-------
+
+Downloads and configures Googletest library using the FetchContent CMake module
+
+Imported Targets
+^^^^^^^^^^^^^^^^
+
+This module provides the following imported targets, if found:
+
+``gtest``
+  The Googletest library
+``gtest_main``
+  The main entry point for running tests
+
+Result Variables
+^^^^^^^^^^^^^^^^
+
+This will define the following variables:
+
+``googletest_POPULATED``
+  True if Googletest has been downloaded and configured
+
+#]=======================================================================]
+
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
