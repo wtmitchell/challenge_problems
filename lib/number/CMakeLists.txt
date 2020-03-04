@@ -3,3 +3,4 @@ add_library(number
   Root.cpp
   )
 target_link_libraries(number GMP::GMPXX GMP::GMP)
+enable_warnings_for(number)

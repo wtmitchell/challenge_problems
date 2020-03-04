@@ -10,6 +10,12 @@ function(add_unittest test_name)
     ${CMAKE_THREAD_LIBS_INIT}
     ${TEST_LINK_COMPONENTS}
     )
+  enable_warnings_for(${test_name})
+
+  # Googletest's headers trigger some warnings we don't care about
+  if("${CMAKE_CXX_COMPILER_ID}}" MATCHES "Clang")
+    target_compile_options(${test_name} PRIVATE -Wno-global-constructors)
+  endif()
 
   # Can either tell CTest about every single unit test, or only
   # tell it about the test executable

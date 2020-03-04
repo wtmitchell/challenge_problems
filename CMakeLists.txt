@@ -1,14 +1,24 @@
 cmake_minimum_required(VERSION 3.16)
-project(PROJECT_EULER)
+project(Challenge_Problems
+  VERSION 0.1
+  HOMEPAGE_URL https://github.com/wtmitchell/challenge_problems
+  LANGUAGES CXX
+  )
 
-set (PROJECT_VERSION_MAJOR 0)
-set (PROJECT_VERSION_MINOR 1)
+# Add path for custom modules
+set(CMAKE_MODULE_PATH
+  ${CMAKE_MODULE_PATH}
+  "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
+  )
+
 
 # Compiler Flags
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(GCC_WARNINGS "-Wall -Wextra -Wpedantic -Wunused -Wformat=2 -Wswitch-enum -Wsuggest-attribute=pure -Wsuggest-attribute=const -Wsuggest-attribute=noreturn -Wcast-align -Wcast-qual -Wconversion -Wsign-conversion -Wzero-as-null-pointer-constant -Wlogical-op -Wmissing-declarations -Wctor-dtor-privacy -Wnoexcept -Wnon-virtual-dtor -Wstrict-null-sentinel -Wold-style-cast -Woverloaded-virtual -Wfloat-equal -Wredundant-decls -Wshadow -Wwrite-strings -Wno-long-long")
-set(CLANG_WARNINGS "-Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-c++11-extensions -Wno-padded -Wno-documentation-unknown-command")
+include(CompilerSetup)
+colorize_output()
 
 set(CLANG_DEBUG "-O0 -g")
 set(CLANG_RELEASE "-O0 -g")
@@ -64,12 +74,6 @@ endif()
 # Set up the compiler flags used
 if(CMAKE_COMPILER_IS_GNUCXX)
   # gcc
-  set(CMAKE_CXX_FLAGS "${GCC_WARNINGS}")
-
-  if (CMAKE_GENERATOR STREQUAL "Ninja")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color")
-  endif (CMAKE_GENERATOR STREQUAL "Ninja")
-
   if (USE_SANITIZER_ADDRESS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
   endif ()
@@ -91,12 +95,6 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 else()
   if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     # clang
-    set(CMAKE_CXX_FLAGS "${CLANG_WARNINGS}")
-
-    if (CMAKE_GENERATOR STREQUAL "Ninja")
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcolor-diagnostics")
-    endif (CMAKE_GENERATOR STREQUAL "Ninja")
-
     if (USE_LIBCXX)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     endif()
@@ -126,11 +124,6 @@ else()
   endif()
 endif()
 
-# Add path for custom modules
-set(CMAKE_MODULE_PATH
-  ${CMAKE_MODULE_PATH}
-  "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
-  )
 
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})

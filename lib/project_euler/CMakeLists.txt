@@ -39,3 +39,4 @@ add_library(project_euler
   )
 
 target_link_libraries(project_euler GMP::GMPXX GMP::GMP)
+enable_warnings_for(project_euler)
