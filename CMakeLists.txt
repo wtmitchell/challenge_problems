@@ -17,14 +17,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+include(DefaultBuildType)
 include(CompilerSetup)
 colorize_output()
-
-set(CLANG_DEBUG "-O0 -g")
-set(CLANG_RELEASE "-O0 -g")
-
-set(GCC_DEBUG "-O0 -g")
-set(GCC_RELEASE "-O0 -g")
 
 # Build options
 option(USE_LIBCXX "Use libc++ when using Clang" OFF)
@@ -90,8 +85,6 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
   endif ()
 
-  set(CMAKE_CXX_FLAGS_DEBUG "${GCC_DEBUG}")
-  set(CMAKE_CXX_FLAGS_RELEASE "${GCC_RELEASE}")
 else()
   if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     # clang
@@ -114,13 +107,6 @@ else()
     if (USE_SANITIZER_UNDEFINED)
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
     endif ()
-
-    set(CMAKE_CXX_FLAGS_DEBUG "${CLANG_DEBUG}")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CLANG_RELEASE}")
-  else()
-    # Generic flags for undetected compiler
-    set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3")
   endif()
 endif()
 
