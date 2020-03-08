@@ -1,13 +1,11 @@
 include(GetGoogletest)
 include(GoogleTest)
-find_package(Threads)
 
 function(add_unittest test_name)
   add_executable(${test_name} ${ARGN})
   target_link_libraries(${test_name}
-    gtest
-    gtest_main
-    ${CMAKE_THREAD_LIBS_INIT}
+    GTest::gtest
+    GTest::gtest_main
     ${TEST_LINK_COMPONENTS}
     )
   enable_warnings_for(${test_name})
