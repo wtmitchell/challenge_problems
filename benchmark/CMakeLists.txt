@@ -1,7 +1,4 @@
-
 include(GetGoogleBenchmark)
-
-include_directories(${PROJECT_SOURCE_DIR}/include)
 
 find_package(Threads)
 # Function to collect a libraries benchmarks together into a distinct

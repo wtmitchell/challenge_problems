@@ -37,6 +37,6 @@ add_library(project_euler
   ${project_euler_files}
   ${gen_files}
   )
-
+target_include_directories(project_euler PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(project_euler GMP::GMPXX GMP::GMP)
 enable_warnings_for(project_euler)
